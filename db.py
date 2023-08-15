@@ -23,7 +23,7 @@ async def add_group(group_id, group_name, user_name, user_id, channels, f_sub, v
        pass
 
 async def add_user(id, name):
-    data = {"_id":id, "name":name}
+    data = {"_id":id, "name":name, "status": False}
     try:
        await user_col.insert_one(data)
     except DuplicateKeyError:
