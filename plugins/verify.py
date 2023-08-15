@@ -51,11 +51,11 @@ async def verify_(bot, update):
     group = await get_group(id)
     name  = group["name"]
     user  = group["user_id"]
-    if update.data.split("_")[1]=="approve":
+    if update.data.split(":")[1]=="approve":
        await update_group(id, {"verified":True})
        await bot.send_message(chat_id=user, text=f"Your authentication request for {name} has been approved ✅")
-       await update.message.edit(update.message.text.html.replace("#NewRequest", "#Approved"))
+       await update.message.edit(update.message.text.replace("#NewRequest", "#Approved"))
     else:
        await delete_group(id)
        await bot.send_message(chat_id=user, text=f"Your authentication request for {name} has been declined Becauss You Dont Bought Paid /buy Now")
-       await update.message.edit(update.message.text.html.replace("#NewRequest", "#Declined"))
+       await update.message.edit(update.message.text.replace("#NewRequest", "#Declined"))
