@@ -15,3 +15,9 @@ async def start_handle(_, m):
   ]])
   await add_user(user_id=user.id)
   await m.reply(START_MSG,reply_markup=BUTTON)
+
+@client.on_callback_query()
+async def cb_help(_, q):
+  data = q.data
+  if data == "help":
+    await q.message.edit("bTa Kya help Chahiye")
