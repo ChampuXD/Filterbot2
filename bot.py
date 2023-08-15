@@ -32,7 +32,6 @@ class Bot(Client):
     async def start(self):                        
         try:
             await super().start()
-            await Bot.send_message(CHAT_ID, "ALIVE")
             await User.start()    
             LOGGER.info("Bot Started ⚡")
         except Exception as e:
