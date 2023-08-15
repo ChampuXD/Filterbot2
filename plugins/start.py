@@ -22,7 +22,7 @@ async def cb_help(_, q):
   if data == "close_m":
     await q.message.delete()
 
-@bot.on_message(filters.command("id"))
+@Client.on_message(filters.command("id"))
 async def id_handle(_, m):
   chat_id = m.chat.id
   user = m.from_user

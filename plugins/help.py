@@ -38,7 +38,8 @@ BUTTON = InlineKeyboardMarkup([[
   InlineKeyboardButton(text="Buy",callback_data="buy_p"),
   InlineKeyboardButton(text="owner",user_id=OWNER_ID)
   ]])
-@bot.on_message(filters.command("help"))
+
+@Client.on_message(filters.command("help"))
 async def help_handler(_, m):
   chat_id = m.chat.id
   await m.reply(HELP_TEXT,reply_markup=BUTTON)
