@@ -21,7 +21,7 @@ async def cb_help(_, q):
   chat_id = q.message.chat.id
   data = q.data
   if data == "close":
-    await client.delete_message(chat_id, q.message.id)
+    await client.delete_messages(chat_id, q.message.id)
 
 @Client.on_message(filters.command("id"))
 async def id_handle(_, m):
