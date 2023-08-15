@@ -49,9 +49,11 @@ async def _verify(bot, message):
 @Client.on_callback_query(filters.regex(r"^verify"))
 async def verify_(bot, update):
     id = int(update.data.split(":")[2])
+    print(id)
     group = await get_group(id)
     name  = group["name"]
     user  = group["user_id"]
+    print(update.data.split)
     if update.data.split(":")[1]=="approve":
        await update_group(id, {"verified":True})
        await bot.send_message(chat_id=user, text=f"Your authentication request for {name} has been approved ✅")
