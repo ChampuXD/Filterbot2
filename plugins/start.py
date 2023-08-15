@@ -18,9 +18,10 @@ async def start_handle(_, m):
 
 @Client.on_callback_query()
 async def cb_help(_, q):
+  chat_id = q.message.chat.id
   data = q.data
   if data == "close":
-    await q.message.delete()
+    await client.delete_message(chat_id, q.message.id)
 
 @Client.on_message(filters.command("id"))
 async def id_handle(_, m):
