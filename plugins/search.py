@@ -19,7 +19,7 @@ async def clean_query(query):
     return " ".join(cleaned_words)
 
 
-@Client.on_message(filters.text & filters.group & filters.incoming & ~filters.command(["connect"))
+@Client.on_message(filters.text & filters.group & filters.incoming & ~filters.command(["connect", "verify"]))
 async def search(bot, message):
     start_time = time.time()  # Start measuring elapsed time
     f_sub = await force_sub(bot, message)
