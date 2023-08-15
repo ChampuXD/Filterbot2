@@ -10,8 +10,8 @@ async def start_handle(_, m):
   user = m.from_user
   START_MSG = ''' HEY {user.mention} Welcome \n I am Movies Filter Bot\n '''
   BUTTON = InlineKeyboardMarkup([[
-    InlineKeyboardButton[(text="Help", callback_data="help"),
-    (text="Owner", user_id=OWNER_ID)]
+    InlineKeyboardButton[("Help", callback_data="help"),
+    ("Owner", user_id=OWNER_ID)]
   ]])
   add_user(user_id=user.id)
   await m.reply(START_MSG,reply_markup=BUTTON)
