@@ -25,7 +25,7 @@ async def add_group(group_id, group_name, user_name, user_id, channels, f_sub, v
 async def get_group(id):
     data = {'_id':id}
     group = await grp_col.find_one(data)
-    return dict(group)
+    return group
 
 async def update_group(id, new_data):
     data = {"_id":id}
