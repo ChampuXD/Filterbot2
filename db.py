@@ -6,15 +6,6 @@ from pyrogram.errors import UserNotParticipant
 from motor.motor_asyncio import AsyncIOMotorClient as MongoClient
 from pyrogram.types import ChatPermissions, InlineKeyboardMarkup, InlineKeyboardButton
 
-import asyncio
-from config import *
-from pyrogram import enums
-from imdb import Cinemagoer
-from pymongo.errors import DuplicateKeyError
-from pyrogram.errors import UserNotParticipant
-from motor.motor_asyncio import AsyncIOMotorClient as MongoClient
-from pyrogram.types import ChatPermissions, InlineKeyboardMarkup, InlineKeyboardButton
-
 dbclient = MongoClient(DATABASE_URI)
 db       = dbclient["Filter-Bot"]
 grp_col  = db["GROUPS"]
