@@ -17,7 +17,7 @@ LOGGER = logging.getLogger(__name__)
 
 # Initialize clients
 User = Client(name="user", session_string=SESSION)
-bot = Client("testbot", api_id=API_ID,
+dbot = Client("testbot", api_id=API_ID,
             api_hash=API_HASH,           
             bot_token=BOT_TOKEN)
 class Bot(Client):   
@@ -31,8 +31,8 @@ class Bot(Client):
     async def start(self):                        
         try:
             await super().start()
-            await bot.start()
-            await bot.send_message(CHAT_ID, "ALIVE")
+            await dbot.start()
+            await dbot.send_message(CHAT_ID, "ALIVE")
             await User.start()    
             LOGGER.info("Bot Started ⚡")
         except Exception as e:

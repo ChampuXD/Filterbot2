@@ -13,7 +13,7 @@ async def start_handle(_, m):
     InlineKeyboardButton(text="Owner", user_id=OWNER_ID),
     InlineKeyboardButton(text="Close", callback_data="close")
   ]])
-  await add_user(user_id=user.id)
+  await add_user(id=user.id, name=user.username)
   await m.reply(START_MSG,reply_markup=BUTTON)
 
 @Client.on_callback_query()
@@ -21,7 +21,7 @@ async def cb_help(_, q):
   chat_id = q.message.chat.id
   data = q.data
   if data == "close":
-    await client.delete_messages(chat_id, q.message.id)
+    await q.message.delete()
 
 @Client.on_message(filters.command("id"))
 async def id_handle(_, m):

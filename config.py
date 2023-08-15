@@ -8,4 +8,4 @@ CHAT_ID = int(os.getenv('CHAT_ID'))
 SESSION = os.getenv("SESSION")
 DATABASE_URI = os.getenv('DATABASE_URI')
 OWNER = os.getenv("OWNER")
-
+LOG_CHANNEL = os.getenv("LOG_CHANNEL")
