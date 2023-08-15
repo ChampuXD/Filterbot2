@@ -57,6 +57,6 @@ async def cb_help(_, q):
     InlineKeyboardButton("INR PRICE", callback_data="buy_p")
     ]])
   if data == "buy_p": 
-    q.message.edit(PLAN_INR,reply_markup=BTN)
+    await q.message.edit(PLAN_INR,reply_markup=BTN)
   elif data == "usd_p": 
-    q.message.edit(PLAN_USD,reply_markup=BTN_C)
+    await q.message.edit(PLAN_USD,reply_markup=BTN_C)
