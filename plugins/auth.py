@@ -17,8 +17,8 @@ async def auth_handle(_, m):
     return await message.reply("This @{user_name} user group is already verified!")
   else:
     try:
-      period = m.text.split(None,2)[2]
-      await update_group(chat_id,{"verified": True}, period)
+      period = m.text.split(None,2)[-1]
+      await update_group(id=chat_id,{"verified": True}, period)
       await app.send_message(chat_id, f"This Group Verified By @{OWNER}")
     except:
       await m.reply("Verification Request Failed !!\nPlease Give Me Command in correct format\n **`/auth Group ID Time`**")
