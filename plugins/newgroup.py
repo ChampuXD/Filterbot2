@@ -2,6 +2,7 @@ from config import *
 from db import *
 from asyncio import sleep
 from pyrogram import *
+from bot import * 
 
 @Client.on_message(filters.group & filters.new_chat_members)
 async def new_group(bot:Client, message):
