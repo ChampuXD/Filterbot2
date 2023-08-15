@@ -44,7 +44,7 @@ PLAN_INR = '''**These are the prices in INR:**
 
     Click on the `Buy` button to contact the owner'''
 BUTTON = InlineKeyboardMarkup([[
-  InlineKeyboardButton(text="Buy",url=f"@{OWNER}"),
+  InlineKeyboardButton(text="Buy",url=f"t.me/{OWNER}"),
   InlineKeyboardButton(text="INR PRICE",callback_data="inr_p")
   ]])
 
@@ -62,7 +62,7 @@ async def buy_handle(_ ,m):
 async def cb_help(_, q):
   data = q.data
   BTN = InlineKeyboardMarkup([[
-  InlineKeyboardButton(text="Buy",url=f"@{OWNER}"),
+  InlineKeyboardButton(text="Buy",url=f"t.me/{OWNER}"),
   InlineKeyboardButton(text="USD PRICE",callback_data="usd_p")
   ]])
   if data == "inr_p": 
