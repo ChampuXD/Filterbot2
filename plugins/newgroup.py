@@ -4,7 +4,7 @@ from asyncio import sleep
 from pyrogram import *
 
 @Client.on_message(filters.group & filters.new_chat_members)
-async def new_group(bot, message):
+async def new_group(bot:Client, message):
     bot_id = (await bot.get_me()).id
     member = [u.id for u in message.new_chat_members]        
     if bot_id in member:

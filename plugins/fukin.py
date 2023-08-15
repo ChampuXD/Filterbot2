@@ -6,7 +6,7 @@ from db import *
 
 
 @Client.on_message(filters.group & filters.command("index"))
-async def connect(bot, message):
+async def connect(_, message):
     m=await message.reply("connecting..")
     user = await User.get_me()
     try:
