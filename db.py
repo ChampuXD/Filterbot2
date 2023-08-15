@@ -14,4 +14,7 @@ async def add_user(user_id):
   data = {
     "_id": user_id
   }
-  grp_col.insert_one(data)
+  try:
+    await grp_col.insert_one(data)
+  except DuplicateKeyError:
+    pass
