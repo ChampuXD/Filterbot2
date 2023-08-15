@@ -20,7 +20,7 @@ async def connect(bot: Client, message):
     if message.from_user.id!=user_id:
        return await m.edit(f"Only {user_name} can use this command 😁")
     if bool(verified)==False:
-       return await m.edit("This chat is not verified!\nuse /verify")    
+       return await m.edit("This You are not Authentic User!\nuse /verify")    
     try:
        channel = int(message.command[-1])
        if channel in channels:
