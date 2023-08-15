@@ -21,9 +21,26 @@ async def add_group(group_id, group_name, user_name, user_id, channels, f_sub, v
        await grp_col.insert_one(data)
     except DuplicateKeyError:
        pass
+async def update_group(id, new_data, period):
+    data = {"_id":id}
+    new_value = {"$set": new_data}
+    await grp_col.update_one(data, new_value)
+    try:
+      await grp_col.insert_one({"period": period})
+    except DuplicateKeyError:
+      pass
 
+async def delete_group(id):
+    data = {"_id":id}
+    await grp_col.delete_one(data)
+    
+async def get_group(id):
+    data = {'_id':id}
+    group = await grp_col.find_one(data)
+    return dict(group)
+    
 async def add_user(id, name, status):
-    data = {"_id":id, "name":name,"status": False}
+    data = {"_id":id, "name":name,"status": status}
     try:
        await user_col.insert_one(data)
     except DuplicateKeyError:
