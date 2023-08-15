@@ -4,7 +4,7 @@ from pyrogram import *
 from pyrogram.types import *
 
 @Client.on_message(filters.group & filters.command("verify"))
-async def _verify(bot, message):
+async def _verify(bot: Client, message):
     try:
         group = await get_group(message.chat.id)
         user_id = group["user_id"]
@@ -42,11 +42,7 @@ async def _verify(bot, message):
                  InlineKeyboardButton("❌ Decline", callback_data=f"verify_decline_{message.chat.id}")],
                 [InlineKeyboardButton("👀 View Group", url=f"{link}")]]
 
-    await bot.send_message(chat_id=LOG_CHANNEL,
-                           text=text,
-                           disable_web_page_preview=True,
-                           reply_markup=InlineKeyboardMarkup(keyboard))
-
+    await bot.send_message(chat_id=LOG_CHANNEL, text=text, disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup(keyboard))
     await message.reply("Verification request sent ✅\nWe will notify you personally when it is approved.")
 
 @Client.on_callback_query(filters.regex(r"^verify"))
