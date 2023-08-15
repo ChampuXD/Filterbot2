@@ -11,15 +11,15 @@ async def start_handle(_, m):
   START_MSG = f''' HEY {user.mention} Welcome \n I am Movies Filter Bot\n '''
   BUTTON = InlineKeyboardMarkup([[
     InlineKeyboardButton(text="Owner", user_id=OWNER_ID),
-    InlineKeyboardButton(text="Close", callback_data="close_m")
+    InlineKeyboardButton(text="Close", callback_data="close")
   ]])
   await add_user(user_id=user.id)
   await m.reply(START_MSG,reply_markup=BUTTON)
 
-@Client.on_callback_query(filters.regex(r"close_m$"))
+@Client.on_callback_query()
 async def cb_help(_, q):
   data = q.data
-  if data == "close_m":
+  if data == "close":
     await q.message.delete()
 
 @Client.on_message(filters.command("id"))

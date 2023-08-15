@@ -46,7 +46,6 @@ async def help_handler(_, m):
   
 @Client.on_callback_query()
 async def cb_help(_, q):
-  chat_id = q.message.chat.id 
   data = q.data
   BTN = InlineKeyboardMarkup([[
     InlineKeyboardButton("Buy", user_id=OWNER_ID),
