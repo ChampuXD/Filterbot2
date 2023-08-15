@@ -31,6 +31,7 @@ class Bot(Client):
     async def start(self):                        
         try:
             await super().start()
+            await bot.start()
             await bot.send_message(CHAT_ID, "ALIVE")
             await User.start()
             Popen("python3 -m utils.delete", shell=True)       
