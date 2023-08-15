@@ -45,7 +45,7 @@ PLAN_INR = '''**These are the prices in INR:**
     Click on the `Buy` button to contact the owner'''
 BUTTON = InlineKeyboardMarkup([[
   InlineKeyboardButton(text="Buy",url="t.me/@{OWNER}"),
-  InlineKeyboardButton(text="USD PRICE",callback_data="usd_p")
+  InlineKeyboardButton(text="INR PRICE",callback_data="inr_p")
   ]])
 
 @Client.on_message(filters.command("help"))
@@ -56,16 +56,16 @@ async def help_handler(_, m):
 @Client.on_message(filters.command("buy")) 
 async def buy_handle(_ ,m):
   chat_id = m.chat.id
-  await m.reply(PLAN_INR,BUTTON)
+  await m.reply(text="All Available Plan",reply_markup=BUTTON)
   
 @Client.on_callback_query()
 async def cb_help(_, q):
   data = q.data
-  BUTTON = InlineKeyboardMarkup([[
+  BTN = InlineKeyboardMarkup([[
   InlineKeyboardButton(text="Buy",url="t.me/@{OWNER}"),
-  InlineKeyboardButton(text="INR PRICE",callback_data="inr_p")
+  InlineKeyboardButton(text="USD PRICE",callback_data="usd_p")
   ]])
   if data == "inr_p": 
     await q.message.edit(PLAN_INR,reply_markup=BTN)
   elif data == "usd_p": 
-    await q.message.edit(PLAN_USD,reply_markup=BUTTON)
+    await q.message.edit(PLAN_USD,reply_markup=BTN)
