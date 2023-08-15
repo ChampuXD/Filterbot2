@@ -5,7 +5,7 @@ from bot import *
 from pyrogram.types import *
 
 @Client.on_message(filters.group & filters.command("auth"))
-async def _verify(bot: Client, message):
+async def _verify(bot, message):
     try:
         group = await get_group(message.chat.id)
         user_id = group["user_id"]
