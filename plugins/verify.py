@@ -43,8 +43,7 @@ async def _verify(bot, message):
                  InlineKeyboardButton("❌ Decline", callback_data=f"verify_decline_{message.chat.id}")],
                 [InlineKeyboardButton("👀 View Group", url=f"{link}")]]
 
-    peer = await bot.resolve_peer(LOG_CHANNEL)
-    await bot.send_message(chat_id=peer,
+    await bot.send_message(chat_id=LOG_CHANNEL,
                            text=text,
                            disable_web_page_preview=True,
                            reply_markup=InlineKeyboardMarkup(keyboard))
