@@ -30,17 +30,17 @@ Auto_delete : use /Auto_delete command to enable or disable
 
 PLAN_USD = '''These are the prices in USD:
 
-    `1.2 USD` - per Month 
-    `6.2 USD` - per 6 Months
-    `12.3 USD` - per Year
+    `2.5 USD` - per Month 
+    `8 USD` - per 6 Months
+    `15 USD` - per Year
 
     Click on the Buy button to contact the owner'''
     
 PLAN_INR = '''**These are the prices in INR:**
 
-    `99 INR` - per Month 
-    `599 INR` -  per 6 Months
-    `1000 INR` -  per Year
+    `200 INR` - per Month 
+    `600 INR` -  per 6 Months
+    `1200 INR` -  per Year
 
     Click on the `Buy` button to contact the owner'''
 BUTTON = InlineKeyboardMarkup([[
@@ -56,7 +56,7 @@ async def help_handler(_, m):
 @Client.on_message(filters.command("buy")) 
 async def buy_handle(_ ,m):
   chat_id = m.chat.id
-  await m.reply(text="All Available Plan",reply_markup=BUTTON)
+  await m.reply(text="All The Available Plans",reply_markup=BUTTON)
   
 @Client.on_callback_query()
 async def cb_help(_, q):
@@ -68,4 +68,4 @@ async def cb_help(_, q):
   if data == "inr_p": 
     await q.message.edit(PLAN_INR,reply_markup=BTN)
   elif data == "usd_p": 
-    await q.message.edit(PLAN_USD,reply_markup=BTN)
+    await q.message.edit(PLAN_USD,reply_markup=BUTTON)
