@@ -10,8 +10,8 @@ async def start_handle(_, m):
   user = m.from_user
   START_MSG = f''' HEY {user.mention} Welcome \n I am Movies Filter Bot\n '''
   BUTTON = InlineKeyboardMarkup([[
-    InlineKeyboardButton(text="Help", callback_data="help"),
-    InlineKeyboardButton(text="Owner", user_id=OWNER_ID)
+    InlineKeyboardButton(text="Owner", user_id=OWNER_ID),
+    InlineKeyboardButton(text="Close", callback_data="close_m")
   ]])
   await add_user(user_id=user.id)
   await m.reply(START_MSG,reply_markup=BUTTON)
@@ -19,10 +19,10 @@ async def start_handle(_, m):
 @bot.on_callback_query()
 async def cb_help(_, q):
   data = q.data
-  if data == "help":
-    await q.message.edit("bTa Kya help Chahiye")
+  if data == "close_m":
+    await q.message.delete()
 
-@Client.on_message(filters.command("id"))
+@bot.on_message(filters.command("id"))
 async def id_handle(_, m):
   chat_id = m.chat.id
   user = m.from_user
@@ -37,6 +37,3 @@ async def id_handle(_, m):
     MSG += f"Your ID: `{user_id}`"
     await m.reply(MSG)
 
-@Client.on_message(filters.command("verify"))
-async def verify_handle(_, m):
-  chat_id = m.chat.id
