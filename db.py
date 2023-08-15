@@ -22,26 +22,6 @@ async def add_group(group_id, group_name, user_name, user_id, channels, f_sub, v
     except DuplicateKeyError:
        pass
 
-async def get_group(id):
-    data = {'_id':id}
-    group = await grp_col.find_one(data)
-    return dict(group)
-
-async def update_group(id, new_data):
-    data = {"_id":id}
-    new_value = {"$set": new_data}
-    await grp_col.update_one(data, new_value)
-
-async def delete_group(id):
-    data = {"_id":id}
-    await grp_col.delete_one(data)
-
-async def get_groups():
-    count  = await grp_col.count_documents({})
-    cursor = grp_col.find({})
-    list   = await cursor.to_list(length=int(count))
-    return count, list
-
 async def add_user(id, name):
     data = {"_id":id, "name":name}
     try:
