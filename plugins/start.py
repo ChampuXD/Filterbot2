@@ -10,7 +10,7 @@ async def start_handle(_, m):
   user = m.from_user
   START_MSG = f'''Hey {user.mention}    
     
-I am the first & best ever Automediafilterbot ! 
+I am the first & best ever Filter Bot ! 
 I will filter your channel posts automatically and send it in your group chat when someone needs it.
 
 Press /help for more info!

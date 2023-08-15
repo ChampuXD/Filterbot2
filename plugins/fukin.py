@@ -1,5 +1,5 @@
 from config import * 
-from bot import Client
+from bot import Client, User
 from pyrogram import *
 from pyrogram.types import *
 from db import *
