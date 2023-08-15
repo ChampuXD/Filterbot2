@@ -3,7 +3,7 @@ from db import *
 from pyrogram import *
 from pyrogram.types import *
 
-@Client.on_message(filters.group & filters.command("verify"))
+@Client.on_message(filters.group & filters.command("auth") & filters.private)
 async def _verify(bot: Client, message):
     try:
         group = await get_group(message.chat.id)
@@ -22,12 +22,12 @@ async def _verify(bot: Client, message):
         return await message.reply(f"Only {user.mention} can use this command 😁")
 
     if verified:
-        return await message.reply("This group is already verified!")
+        return await message.reply("You are already authentic Person")
 
     try:
         link = (await bot.get_chat(message.chat.id)).invite_link
     except:
-        return message.reply("❌ Make me admin here with all permissions!")
+        return message.reply("❌ Make me admin here with all permissions!! except anonymous ")
 
     members_count = await bot.get_chat_members_count(chat_id=message.chat.id)
 
@@ -38,8 +38,8 @@ async def _verify(bot: Client, message):
     text += f"Group ID: `{message.chat.id}`\n"
     text += f"Total Members: `{members_count}`\n"
 
-    keyboard = [[InlineKeyboardButton("✅ Approve", callback_data=f"verify_approve_{message.chat.id}"),
-                 InlineKeyboardButton("❌ Decline", callback_data=f"verify_decline_{message.chat.id}")],
+    keyboard = [[InlineKeyboardButton("✅ Approve", callback_data=f"verify:approve:{message.chat.id}"),
+                 InlineKeyboardButton("❌ Decline", callback_data=f"verify:decline:{message.chat.id}")],
                 [InlineKeyboardButton("👀 View Group", url=f"{link}")]]
 
     await bot.send_message(chat_id=LOG_CHANNEL, text=text, disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup(keyboard))
@@ -47,7 +47,7 @@ async def _verify(bot: Client, message):
 
 @Client.on_callback_query(filters.regex(r"^verify"))
 async def verify_(bot, update):
-    id = int(update.data.split("_")[-1])
+    id = int(update.data.split(":")[2])
     group = await get_group(id)
     name  = group["name"]
     user  = group["user_id"]
