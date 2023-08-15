@@ -4,20 +4,29 @@ from pyrogram import *
 from pyrogram.types import *
 from db import *
 
-HELP_TEXT = f'''To Use me In A Group
-First Buy Subscription , Contact the bot owner 👉 @{OWNER}
-It Will Cost index Plan Per Month
+HELP_TEXT = f'''😇How To use  me
 
-- Add me in your group & channel with all permissions. 
-- Send /verify in group & wait for It To Accept Or Directly Contact To Owner After Request 
-- After verification send /index YourChannelID
-- Example : /index -100xxxxxxxxxx
-- Done ✅. Enjoy 💜❤ )
+press /buy to purchase a subscription.
+
+Index a group with - /index 
+EXAMPLE: /index -100xxxxxxxxxxx
+Add me in the channel. And make sure I have all the permissions!
+
 
 Remove a Channel with - /remove -100xxxxxxxxxxx
 this will help you to remove a indexed channel from your group.
 
-Get connected channels list with - /viewlist '''
+
+Get indexed channels list with - /viewlist 
+
+Check your information with - /info
+Gives your information and validity of your subscription
+
+Get ID of current chat - /getid
+
+Auto_delete : use /Auto_delete command to enable or disable
+              auto message delete system.
+'''
 
 PLAN_USD = '''These are the prices in USD:
 
@@ -35,27 +44,28 @@ PLAN_INR = '''**These are the prices in INR:**
 
     Click on the `Buy` button to contact the owner'''
 BUTTON = InlineKeyboardMarkup([[
-  InlineKeyboardButton(text="Buy",callback_data="buy_p"),
-  InlineKeyboardButton(text="owner",user_id=OWNER_ID)
+  InlineKeyboardButton(text="Buy",url="t.me/@{OWNER}"),
+  InlineKeyboardButton(text="USD PRICE",callback_data="usd_p")
   ]])
 
 @Client.on_message(filters.command("help"))
 async def help_handler(_, m):
   chat_id = m.chat.id
-  await m.reply(HELP_TEXT,reply_markup=BUTTON)
+  await m.reply(HELP_TEXT)
+
+@Client.on_message(filters.command("buy")) 
+async def buy_handle(_ ,m):
+  chat_id = m.chat.id
+  await m.reply(PLAN_INR,BUTTON)
   
 @Client.on_callback_query()
 async def cb_help(_, q):
   data = q.data
-  BTN = InlineKeyboardMarkup([[
-    InlineKeyboardButton("Buy", user_id=OWNER_ID),
-    InlineKeyboardButton("USD PRICE", callback_data="usd_p")
-    ]])
-  BTN_C = InlineKeyboardMarkup([[
-    InlineKeyboardButton("Buy", user_id=OWNER_ID),
-    InlineKeyboardButton("INR PRICE", callback_data="buy_p")
-    ]])
-  if data == "buy_p": 
+  BUTTON = InlineKeyboardMarkup([[
+  InlineKeyboardButton(text="Buy",url="t.me/@{OWNER}"),
+  InlineKeyboardButton(text="INR PRICE",callback_data="inr_p")
+  ]])
+  if data == "inr_p": 
     await q.message.edit(PLAN_INR,reply_markup=BTN)
   elif data == "usd_p": 
-    await q.message.edit(PLAN_USD,reply_markup=BTN_C)
+    await q.message.edit(PLAN_USD,reply_markup=BUTTON)

@@ -8,19 +8,18 @@ from pyrogram.types import *
 @Client.on_message(filters.command("start") & filters.private)
 async def start_handle(_, m):
   user = m.from_user
-  START_MSG = f''' HEY {user.mention} Welcome \n I am Movies Filter Bot\n '''
-  BUTTON = InlineKeyboardMarkup([[
-    InlineKeyboardButton(text="Owner", user_id=OWNER_ID),
-    InlineKeyboardButton(text="Close", callback_data="close")
-  ]])
-  await add_user(id=user.id, name=user.username)
-  await m.reply(START_MSG,reply_markup=BUTTON)
+  START_MSG = f'''Hey {user.mention}    
+    
+I am the first & best ever Automediafilterbot ! 
+I will filter your channel posts automatically and send it in your group chat when someone needs it.
 
-@Client.on_callback_query()
-async def cb_help(_, q):
-  data = q.data
-  if data == "close":
-    await q.message.delete()
+Press /help for more info!
+Press /buy to purchase a subscription!
+
+your chat id = {user.id}'''
+  await add_user(id=user.id, name=user.username)
+  await m.reply(START_MSG)
+
 
 @Client.on_message(filters.command("id"))
 async def id_handle(_, m):
