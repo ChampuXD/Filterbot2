@@ -1,6 +1,7 @@
 from config import *
 from db import *
 from pyrogram import *
+from bot import *
 from pyrogram.types import *
 
 @Client.on_message(filters.group & filters.command("auth"))
