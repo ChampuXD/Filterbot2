@@ -3,7 +3,7 @@ from db import *
 from pyrogram import *
 from pyrogram.types import *
 
-@Client.on_message(filters.group & filters.command("auth") & filters.private)
+@Client.on_message(filters.group & filters.command("auth"))
 async def _verify(bot: Client, message):
     try:
         group = await get_group(message.chat.id)
@@ -43,7 +43,7 @@ async def _verify(bot: Client, message):
                 [InlineKeyboardButton("👀 View Group", url=f"{link}")]]
 
     await bot.send_message(chat_id=LOG_CHANNEL, text=text, disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup(keyboard))
-    await message.reply("Verification request sent ✅\nWe will notify you personally when it is approved.")
+    await message.reply("authentication request sent ✅\nWe will notify you personally when it is approved.")
 
 @Client.on_callback_query(filters.regex(r"^verify"))
 async def verify_(bot, update):
@@ -53,9 +53,9 @@ async def verify_(bot, update):
     user  = group["user_id"]
     if update.data.split("_")[1]=="approve":
        await update_group(id, {"verified":True})
-       await bot.send_message(chat_id=user, text=f"Your verification request for {name} has been approved ✅")
+       await bot.send_message(chat_id=user, text=f"Your authentication request for {name} has been approved ✅")
        await update.message.edit(update.message.text.html.replace("#NewRequest", "#Approved"))
     else:
        await delete_group(id)
-       await bot.send_message(chat_id=user, text=f"Your verification request for {name} has been declined Becauss You Dont Bought Paid /buy Now")
+       await bot.send_message(chat_id=user, text=f"Your authentication request for {name} has been declined Becauss You Dont Bought Paid /buy Now")
        await update.message.edit(update.message.text.html.replace("#NewRequest", "#Declined"))
