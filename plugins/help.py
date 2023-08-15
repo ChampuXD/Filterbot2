@@ -17,12 +17,12 @@ Remove a Channel with - /remove -100xxxxxxxxxxx
 this will help you to remove a indexed channel from your group.
 
 
-Get indexed channels list with - /viewlist 
+Get indexed channels list with - /connections 
 
 Check your information with - /info
 Gives your information and validity of your subscription
 
-Get ID of current chat - /getid
+Get ID of current chat - /id
 
 Auto_delete : use /Auto_delete command to enable or disable
               auto message delete system.
@@ -69,3 +69,18 @@ async def cb_help(_, q):
     await q.message.edit(PLAN_INR,reply_markup=BTN)
   elif data == "usd_p": 
     await q.message.edit(PLAN_USD,reply_markup=BUTTON)
+    
+@Client.on_message(filters.command("id"))
+async def id_handle(_, m):
+  chat_id = m.chat.id
+  user = m.from_user
+  MSG = f"This Chat ID : `{chat_id}`\n"
+  
+  if m.reply_to_message:
+    user_id = m.reply_to_message.from_user.id
+    MSG += f"Reply User ID: `{user_id}`"
+    await m.reply(MSG)
+  else:
+    user_id = m.from_user.id
+    MSG += f"Your ID: `{user_id}`"
+    await m.reply(MSG)

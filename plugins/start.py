@@ -21,18 +21,5 @@ your chat id = {user.id}'''
   await m.reply(START_MSG)
 
 
-@Client.on_message(filters.command("id") & filters.group & filters.channel)
-async def id_handle(_, m):
-  chat_id = m.chat.id
-  user = m.from_user
-  MSG = f"This Chat ID : `{chat_id}`\n"
-  
-  if m.reply_to_message:
-    user_id = m.reply_to_message.from_user.id
-    MSG += f"Reply User ID: `{user_id}`"
-    await m.reply(MSG)
-  else:
-    user_id = m.from_user.id
-    MSG += f"Your ID: `{user_id}`"
-    await m.reply(MSG)
+
 
