@@ -20,6 +20,7 @@ User = Client(name="user", session_string=SESSION)
 dbot = Client("testbot", api_id=API_ID,
             api_hash=API_HASH,           
             bot_token=BOT_TOKEN)
+            
 class Bot(Client):   
     def __init__(self):
         super().__init__(   
@@ -31,8 +32,7 @@ class Bot(Client):
     async def start(self):                        
         try:
             await super().start()
-            await dbot.start()
-            await dbot.send_message(CHAT_ID, "ALIVE")
+            await Bot.send_message(CHAT_ID, "ALIVE")
             await User.start()    
             LOGGER.info("Bot Started ⚡")
         except Exception as e:
