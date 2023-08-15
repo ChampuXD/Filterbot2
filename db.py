@@ -25,7 +25,7 @@ async def add_group(group_id, group_name, user_name, user_id, channels, f_sub, v
 async def get_group(id):
     data = {'_id':id}
     group = await grp_col.find_one(data)
-    return group
+    return dict(group)
 
 async def update_group(id, new_data):
     data = {"_id":id}
@@ -72,20 +72,6 @@ async def delete_all_dlt_data(time):
     data = {"time":{"$lte":time}}
     await dlt_col.delete_many(data)
 
-async def search_imdb(query):
-    try:
-       int(query)
-       movie = ia.get_movie(query)
-       return movie["title"]
-    except:
-       movies = ia.search_movie(query, results=10)
-       list = []
-       for movie in movies:
-           title = movie["title"]
-           try: year = f" - {movie['year']}"
-           except: year = ""
-           list.append({"title":title, "year":year, "id":movie.movieID})
-       return list
 
 async def force_sub(bot, message):
     group = await get_group(message.chat.id)
