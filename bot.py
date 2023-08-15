@@ -1,4 +1,3 @@
-from subprocess import Popen
 import logging
 from datetime import datetime 
 import asyncio 
@@ -34,8 +33,7 @@ class Bot(Client):
             await super().start()
             await bot.start()
             await bot.send_message(CHAT_ID, "ALIVE")
-            await User.start()
-            Popen("python3 -m utils.delete", shell=True)       
+            await User.start()    
             LOGGER.info("Bot Started ⚡")
         except Exception as e:
             LOGGER.exception("Error while starting bot: %s", str(e))
