@@ -13,5 +13,5 @@ async def start_handle(_, m):
     InlineKeyboardButton(text="Help", callback_data="help"),
     InlineKeyboardButton(text="Owner", user_id=OWNER_ID)
   ]])
-  add_user(user_id=user.id)
+  await add_user(user_id=user.id)
   await m.reply(START_MSG,reply_markup=BUTTON)
