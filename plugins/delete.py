@@ -5,7 +5,7 @@ from bot import dbot
 import time 
 
 async def check_up(bot):   
-    _time = int(time.time()) 
+    _time = int(time()) 
     all_data = await get_all_dlt_data(_time)
     for data in all_data:
         try:
