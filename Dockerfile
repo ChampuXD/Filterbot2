@@ -33,11 +33,11 @@ RUN mkdir /Filterbot
 WORKDIR /Filterbot
 COPY start.sh /start.sh
 
-# Running MdiskRobot
+# Running Filterbot 
 CMD ["/bin/bash", "/start.sh"]U -r requirements.txt
 RUN mkdir /Filterbot
 WORKDIR /Filterbot
 COPY start.sh /start.sh
 
-# Running MdiskRobot
+# Running Filterbot 
 CMD ["/bin/bash", "/start.sh"]
