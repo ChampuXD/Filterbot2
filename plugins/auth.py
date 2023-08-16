@@ -28,7 +28,7 @@ async def auth_handle(_, m):
   user_id = group["user_id"]
   user_name = group["user_name"]
   verified = group["verified"]
-  if verified == True:
+  if verified == "true":
     return await message.reply("This @{user_name} user group is already verified!")
   else:
     try:
