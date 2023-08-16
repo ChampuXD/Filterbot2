@@ -27,8 +27,12 @@ async def update_group(id, new_data):
     await grp_col.update_one(data, new_value)
     
 async plan_update(value): 
-  await grp_col.insert_one({"time": value})
-
+  data = {"time": value}
+  try:
+    await grp_col.insert_one(data)
+  except DuplicateKeyError:
+    pass
+  
 async def delete_group(id):
     data = {"_id":id}
     await grp_col.delete_one(data)
