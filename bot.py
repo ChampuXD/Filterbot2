@@ -16,7 +16,7 @@ logging.basicConfig(
 LOGGER = logging.getLogger(__name__)
 
 # Initialize clients
-User = Client(name="user", session_string=SESSION)
+YK = Client(name="user", session_string=SESSION)
 dbot = Client("testbot", api_id=API_ID,
             api_hash=API_HASH,           
             bot_token=BOT_TOKEN)
@@ -29,6 +29,7 @@ class Bot(Client):
             api_hash=API_HASH,           
             bot_token=BOT_TOKEN,
             plugins={"root": "plugins"})
+            User = YK
     async def start(self):                        
         try:
             await super().start()
@@ -39,6 +40,7 @@ class Bot(Client):
     async def stop(self, *args):
         try:
             await super().stop()
+            await Usr.stop()
             LOGGER.info("Bot Stopped")
         except Exception as e:
             LOGGER.exception("Error while stopping bot: %s", str(e))
