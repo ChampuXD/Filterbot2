@@ -5,6 +5,7 @@ from pymongo.errors import DuplicateKeyError
 from pyrogram.errors import UserNotParticipant
 from motor.motor_asyncio import AsyncIOMotorClient as MongoClient
 from pyrogram.types import ChatPermissions, InlineKeyboardMarkup, InlineKeyboardButton
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 dbclient = MongoClient(DATABASE_URI)
 db       = dbclient["Filter-Bot"]
@@ -104,4 +105,24 @@ async def force_sub(bot, message):
     else:
        return True 
 
+async def update_documents():
+    current_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+    timestamp = current_date.strftime("%Y-%m-%d")
+    # Find documents with the "plan" field less than or equal to the current date
+    documents_to_update = grp_col.find({"plan": {"$lte": timestamp}})
+    
+    for doc in documents_to_update:
+        await grp_col.update_one({"_id": doc["_id"]}, {"$set": {"verified": False}})
 
+scheduler = AsyncIOScheduler()
+scheduler.add_job(update_documents, "interval", days=1)  # Run the task daily
+
+# Start the scheduler
+scheduler.start()
+
+# Run the event loop
+loop = asyncio.get_event_loop()
+try:
+    loop.run_forever()
+finally:
+    loop.close()

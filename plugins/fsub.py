@@ -17,7 +17,7 @@ async def f_sub_cmd(bot, message):
     if message.from_user.id!=user_id:
        return await m.edit(f"Only {user_name} can use this command 😁")
     if bool(verified)==False:
-       return await m.edit("This chat is not verified!\nuse /verify")    
+       return await m.edit(f"You Didn't Purchase any plan!\n Contact To My Owner @{OWNER}")    
     try:
        f_sub = int(message.command[-1])
     except:
