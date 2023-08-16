@@ -17,7 +17,7 @@ Remove a Channel with - /remove -100xxxxxxxxxxx
 this will help you to remove a indexed channel from your group.
 
 
-Get indexed channels list with - /connections 
+Get indexed channels list with - /viewlist 
 
 Check your information with - /info
 Gives your information and validity of your subscription
