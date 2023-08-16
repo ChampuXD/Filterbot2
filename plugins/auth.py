@@ -20,7 +20,7 @@ async def chat_id_check(bot:Client, m):
     await m.reply("You Giving Me @" + uname + " Chat ID")
   
 @Client.on_message(filters.command("auth") & filters.private)
-async def auth_handle(_, m):
+async def auth_handle(bot:Client, m):
   if m.text == "/auth":
     await m.reply("Please Provide Group ID And Time Period")
   chat_id = int(m.text.split(None,1)[1])
