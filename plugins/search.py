@@ -38,31 +38,31 @@ async def search(bot, message):
   if message.text.startswith("/"):
       return
     
-    query = await clean_query(message.text)
-    query_words = query.split()
+  query = await clean_query(message.text)
+  query_words = query.split()
 
-    results = ""
-    for chk in channels:
-        for word in query_words:
-            async for msg in YaaraOP.search_messages(int(chk), query=word, limit=10):
-                if msg.caption or msg.text:
-                    name = (msg.text or msg.caption).split("\n")[0]
-                    if name in results:
-                        continue
-                    new_results = f"{name}\n {msg.link}\n\n"
-                    if len(results) + len(new_results) > MESSAGE_LENGTH:
-                        await message.reply(f"{results}", disable_web_page_preview=True)
-                    results = ""
-                    results += new_results
+  results = ""
+  for chk in channels:
+      for word in query_words:
+          async for msg in YaaraOP.search_messages(int(chk), query=word, limit=10):
+              if msg.caption or msg.text:
+                  name = (msg.text or msg.caption).split("\n")[0]
+                  if name in results:
+                      continue
+                  new_results = f"{name}\n {msg.link}\n\n"
+                  if len(results) + len(new_results) > MESSAGE_LENGTH:
+                      await message.reply(f"{results}", disable_web_page_preview=True)
+                  results = ""
+                  results += new_results
     
-    if results:
-        end = time.time()
-        omk = end - star
-        timee = f"Result Searched in {omk:.02} sec"
-        await message.reply(f" {results}\n {timee}", disable_web_page_preview=True)
-    else:
-        await message.reply("No Movie Found 🔎")
-        _time = int(time()) + (120 * 60)
-        await save_dlt_message(msg, _time)
-    except Exception as e:
-        print(e)
+  if results:
+      end = time.time()
+      omk = end - star
+      timee = f"Result Searched in {omk:.02} sec"
+      await message.reply(f" {results}\n {timee}", disable_web_page_preview=True)
+  else:
+      await message.reply("No Movie Found 🔎")
+      _time = int(time()) + (120 * 60)
+      await save_dlt_message(msg, _time)
+  except Exception as e:
+      print(e)
