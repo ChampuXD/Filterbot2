@@ -29,7 +29,7 @@ async def auth_handle(_, m):
   user_name = group["user_name"]
   verified = group["verified"]
   if verified == True:
-    await m.reply("This @{user_name} user group is already verified!")
+    await m.reply(f"user id: {user_id}\n username: @{username} group chat is already verified!")
   else:
     try:
       id = chat_id
