@@ -13,7 +13,7 @@ async def chat_id_check(bot:Client, m):
   chat_id = m.chat.id
   nid = m.text.split(None,1)[1]
   group = await bot.get_chat(nid)
-  uname = group.user_name
+  uname = group.username
   if nid ==None:
     await m.reply(CHECKING)
   else:  
