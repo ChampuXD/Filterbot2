@@ -49,7 +49,7 @@ async def search(bot, message):
                   new_results = f"{name}\n {msg.link}\n"
                   if len(results) + len(new_results) > MESSAGE_LENGTH:
                       await message.reply(f"{results}", disable_web_page_preview=True)
-                  results = ""
+                    results = ""
                   results += new_results
     
   if results:

@@ -4,7 +4,7 @@ from pyrogram import *
 from pyrogram.types import *
 from bot import Client
 
-@Client.on_message(filters.group & filters.command("fsub"))
+@Client.on_message(filters.group & filters.command("forcesub"))
 async def f_sub_cmd(bot, message):
     m=await message.reply("Please wait..")
     try:
@@ -21,7 +21,7 @@ async def f_sub_cmd(bot, message):
     try:
        f_sub = int(message.command[-1])
     except:
-       return await m.edit("❌ Incorrect format!\nUse `/fsub ChannelID`")       
+       return await m.edit("❌ Incorrect format!\nUse `/forcesub ChannelID`")       
     try:
        chat   = await bot.get_chat(f_sub)
        group  = await bot.get_chat(message.chat.id)
@@ -51,7 +51,7 @@ async def nf_sub_cmd(bot, message):
     if bool(verified)==False:
        return await m.edit("This chat is not verified!\nuse /verify")        
     if bool(f_sub)==False:
-       return await m.edit("This chat is currently don't have any FSub\nuse /fsub")        
+       return await m.edit("This chat is currently don't have any FSub\nuse /forcesub")        
     try:
        chat   = await bot.get_chat(f_sub)
        group  = await bot.get_chat(message.chat.id)
