@@ -118,6 +118,8 @@ async def update_documents():
     
     for doc in documents_to_update:
         await grp_col.update_one({"_id": doc["_id"]}, {"$set": {"verified": False}})
+        id = await grp_col.find({"user_id":doc[user_id]})
+        await bot.send_message(id,"Hey Your Plan Expired Today Now")
 
 scheduler = AsyncIOScheduler()
 scheduler.add_job(update_documents, "interval", days=1)  # Run the task daily
