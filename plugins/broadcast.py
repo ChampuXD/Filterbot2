@@ -52,13 +52,13 @@ async def copy_msgs(br_msg, chat_id):
     except: 
        return False
        
-STATS = """My Status 💫
+STATS = f"""My Status 💫
 
 👥 Users: {}
 🧿 Groups: {}"""
 
 @Client.on_message(filters.command("stats") & filters.user(OWNER_ID))
 async def stats(bot: Client, message):
-    g_count, g_list = await get_groups()
+    #g_count, g_list = await get_groups()
     u_count, u_list = await get_users()
-    await message.reply(STATS.format(u_count, g_count))
+    await message.reply(STATS.format(u_count))
