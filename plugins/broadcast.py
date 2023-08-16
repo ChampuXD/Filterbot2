@@ -61,4 +61,4 @@ STATS = """My Status 💫
 async def stats(bot, message):
     g_count, g_list = await get_groups()
     u_count, u_list = await get_users()
-    await message.reply(STATS.format(u_count, g_count)
+    await message.reply(STATS.format(u_count, g_count))
