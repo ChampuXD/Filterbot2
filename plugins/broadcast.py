@@ -4,6 +4,12 @@ from config import *
 from pyrogram import *
 from pyrogram.errors import FloodWait
 
+BROADCAST = """<u>{}</u>
+
+Total: `{}`
+Remaining: `{}`
+Success: `{}`
+Failed: `{}`"""
 
 @Client.on_message(filters.command('broadcast') & filters.user(OWNER_ID))
 async def broadcast(bot, message):
@@ -29,7 +35,7 @@ async def broadcast(bot, message):
            success +=1
            remaining -=1
         try:                                     
-           await m.edit(script.BROADCAST.format(stats, total, remaining, success, failed))                                 
+           await m.edit(BROADCAST.format(stats, total, remaining, success, failed))                                 
         except:
            pass
     stats = "✅ Broadcast Completed"
@@ -44,4 +50,15 @@ async def copy_msgs(br_msg, chat_id):
        await asyncio.sleep(e.value)
        await copy_msgs(br_msg, chat_id)
     except: 
-       return False      
+       return False
+       
+STATS = """My Status 💫
+
+👥 Users: {}
+🧿 Groups: {}"""
+
+@Client.on_message(filters.command("stats") & filters.user(OWNER_ID))
+async def stats(bot, message):
+    g_count, g_list = await get_groups()
+    u_count, u_list = await get_users()
+    await message.reply(STATS.format(u_count, g_count)

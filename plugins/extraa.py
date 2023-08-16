@@ -43,3 +43,4 @@ async def leave_a_chat(bot, message):
         await message.reply(f"left the chat `{chat}`")
     except Exception as e:
         await message.reply(f'Error - {e}')
+        
