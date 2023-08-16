@@ -1,6 +1,6 @@
 import logging
-from datetime import datetime 
-import asyncio 
+from datetime import datetime
+import asyncio
 from config import *
 from pyrogram import *
 
@@ -16,31 +16,33 @@ logging.basicConfig(
 LOGGER = logging.getLogger(__name__)
 
 # Initialize clients
-YK = Client(name="user", session_string=SESSION)
+YaaraOP = Client(name="user", session_string=SESSION)
 dbot = Client("testbot", api_id=API_ID,
-            api_hash=API_HASH,           
-            bot_token=BOT_TOKEN)
-            
-class Bot(Client):   
+              api_hash=API_HASH,
+              bot_token=BOT_TOKEN)
+
+class Bot(Client):
     def __init__(self):
-        super().__init__(   
-           "bot",
+        super().__init__(
+            "bot",
             api_id=API_ID,
-            api_hash=API_HASH,           
+            api_hash=API_HASH,
             bot_token=BOT_TOKEN,
             plugins={"root": "plugins"})
-          User = YK
-    async def start(self):                        
+        self.user = YaaraOP  # Store User client as an attribute
+
+    async def start(self):
         try:
             await super().start()
-            await User.start()    
+            await self.user.start()  # Start the User client
             LOGGER.info("Bot Started ⚡")
         except Exception as e:
             LOGGER.exception("Error while starting bot: %s", str(e))
+
     async def stop(self, *args):
         try:
             await super().stop()
-            await Usr.stop()
+            await self.user.stop()  # Stop the User client
             LOGGER.info("Bot Stopped")
         except Exception as e:
             LOGGER.exception("Error while stopping bot: %s", str(e))
