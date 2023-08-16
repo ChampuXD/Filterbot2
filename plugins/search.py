@@ -35,31 +35,33 @@ async def search(bot, message):
     if message.text.startswith("/"):
         return
 
-    query = await clean_query(message.text)
+    quer = await clean_query(message.text)
+    bas_yaar = quer.split()
     head = "<u>Here are the results 👇</u>\n\n"
     results = ""
     try:
         for channel in channels:
-            async for msg in YaaraOP.search_messages(chat_id=channel, query=query):
-                name = (msg.text or msg.caption).split("\n")[0]
-                if name in results:
+          for query in bas_yaar:
+              async for msg in YaaraOP.search_messages(chat_id=channel, query=query):
+                  name = (msg.text or msg.caption).split("\n")[0]
+                  if name in results:
                     continue
-                results += f"<b><i> {name}\n {msg.link}</i></b>\n\n"
+                  results += f"<b><i> {name}\n {msg.link}</i></b>\n\n"
 
-        if not results:
+          if not results:
             # Send message if no results are found
-            query_encoded = urllib.parse.quote_plus(query)
-            no_results_message = f"No Results Found For <b>{query}</b>\n\n"
+              query_encoded = urllib.parse.quote_plus(query)
+              no_results_message = f"No Results Found For <b>{query}</b>\n\n"
             google_url = f"https://www.google.com/search?q={query_encoded}+movie"
-            release_date_url = f"https://www.google.com/search?q={query_encoded}+release+date"
-            markup = InlineKeyboardMarkup([
+              release_date_url = f"https://www.google.com/search?q={query_encoded}+release+date"
+              markup = InlineKeyboardMarkup([
                 [InlineKeyboardButton("Check Spelling on Google 🔍", url=google_url)],
                 [InlineKeyboardButton("Check Release Date on Google 📅", url=release_date_url)]
             ])
-            msg = await message.reply_text(text=no_results_message, disable_web_page_preview=True, reply_markup=markup)
-            _time = int(time()) + (2 * 60)
-            await save_dlt_message(msg, _time)
-            return
+              msg = await message.reply_text(text=no_results_message, disable_web_page_preview=True, reply_markup=markup)
+              _time = int(time()) + (2 * 60)
+              await save_dlt_message(msg, _time)
+              return
 
         elapsed_time = time.time() - start_time
         footer = f"Searched in {elapsed_time:.2f} sec." # Add the duration to the footer

@@ -39,7 +39,7 @@ async def broadcast(bot, message):
         except:
            pass
     stats = "✅ Broadcast Completed"
-    await m.reply(script.BROADCAST.format(stats, total, remaining, success, failed)) 
+    await m.reply(BROADCAST.format(stats, total, remaining, success, failed)) 
     await m.delete()                                
 
 
@@ -58,7 +58,7 @@ STATS = """My Status 💫
 🧿 Groups: {}"""
 
 @Client.on_message(filters.command("stats") & filters.user(OWNER_ID))
-async def stats(bot, message):
+async def stats(bot: Client, message):
     g_count, g_list = await get_groups()
     u_count, u_list = await get_users()
     await message.reply(STATS.format(u_count, g_count))
