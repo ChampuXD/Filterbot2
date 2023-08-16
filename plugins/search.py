@@ -47,7 +47,7 @@ async def search(bot, message):
                     continue
                   results += f" {name}\n {msg.link}\n\n"
 
-          if not results:
+            if not results:
               no_results_message = f"No Results Found 🔎 \n\n"
             
               msg = await message.reply_text(text=no_results_message, disable_web_page_preview=True)
@@ -60,5 +60,5 @@ async def search(bot, message):
         msg = await message.reply_text(text=results + t_time, disable_web_page_preview=True)
         _time = int(time()) + (120 * 60)
         await save_dlt_message(msg, _time)
-    except:
-        pass
+    Exception as e:
+        print(e)
