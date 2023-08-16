@@ -21,12 +21,11 @@ async def add_group(group_id, group_name, user_name, user_id, channels, f_sub, v
        await grp_col.insert_one(data)
     except DuplicateKeyError:
        pass
-async def update_group(id, new_data, val):
-    data = {"_id":id}
-    new_value = {"$set":new_data}
-    dat = {"$set": val}
-    await grp_col.update_many(data, new_value,val)
-    
+
+async def update_group(id, new_data):
+    data = {"_id": id}
+    new_value = {"$set": new_data}
+    await grp_col.update_many(data, new_value)
   
 async def delete_group(id):
     data = {"_id":id}
