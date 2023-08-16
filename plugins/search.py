@@ -47,13 +47,13 @@ async def search(bot, message):
                     continue
                   results += f" {name}\n {msg.link}\n\n"
 
-            if not results:
-              no_results_message = f"No Results Found 🔎 \n\n"
+        if not results:
+          no_results_message = f"No Results Found 🔎 \n\n"
             
-              msg = await message.reply_text(text=no_results_message, disable_web_page_preview=True)
-              _time = int(time()) + (2 * 60)
-              await save_dlt_message(msg, _time)
-              return
+          msg = await message.reply_text(text=no_results_message, disable_web_page_preview=True)
+          _time = int(time()) + (2 * 60)
+          await save_dlt_message(msg, _time)
+          return
 
         elapsed_time = time.time() - start_time
         t_time = f"Searched in {elapsed_time:.2f} sec." # Add the duration to the footer
