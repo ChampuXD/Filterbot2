@@ -30,14 +30,11 @@ async def search(bot, message):
   f_sub = await force_sub(bot, message)
   if f_sub == False:
       return
-
   channels = (await get_group(chat_id))["channels"]
   if not channels:
       return
-
   if message.text.startswith("/"):
       return
-    
   query = await clean_query(message.text)
   query_words = query.split()
 
@@ -49,7 +46,7 @@ async def search(bot, message):
                   name = (msg.text or msg.caption).split("\n")[0]
                   if name in results:
                       continue
-                  new_results = f"{name}\n {msg.link}\n\n"
+                  new_results = f"{name}\n {msg.link}\n"
                   if len(results) + len(new_results) > MESSAGE_LENGTH:
                       await message.reply(f"{results}", disable_web_page_preview=True)
                   results = ""
