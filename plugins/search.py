@@ -59,5 +59,5 @@ async def search(bot, message):
       await message.reply(f" {results}\n {timee}", disable_web_page_preview=True)
   else:
       await message.reply("No Movie Found 🔎")
-      _time = int(time()) + (120 * 60)
+      _time = int(time.time()) + (120 * 60)
       await save_dlt_message(msg, _time)
