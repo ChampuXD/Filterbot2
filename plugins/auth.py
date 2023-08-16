@@ -5,7 +5,7 @@ from pyrogram import *
 from pyrogram.types import *
 
 MSG_TO = "This Is Auth Module"
-CHECKING = "Please Provide Me In Correct Format /check <chat id>"
+CHECKING = "Please Provide Me In Correct Format /check -chat id"
 
 
 @Client.on_message(filters.command("check") & filters.user(OWNER_ID))
@@ -28,9 +28,8 @@ async def auth_handle(_, m):
   user_id = group["user_id"]
   user_name = group["user_name"]
   verified = group["verified"]
-  print(verified)
-  if verified == "true":
-    return await message.reply("This @{user_name} user group is already verified!")
+  if verified == True:
+    await message.reply("This @{user_name} user group is already verified!")
   else:
     try:
       id = chat_id
