@@ -11,11 +11,10 @@ CHECKING = "Please Provide Me In Correct Format /check <chat id>"
 @Client.on_message(filters.command("check") & filters.user(OWNER_ID))
 async def chat_id_check(bot:Client, m):
   chat_id = m.chat.id
-  nid = ""
-  if nid == "":
+  if m.text.split(None,1)[1] == "":
     await m.reply(CHECKING)
   else:
-    nind += m.text.split(None,1)[1]
+    nind = m.text.split(None,1)[1]
     group = await bot.get_chat(int(nid))
     uname = group.username 
     await m.reply("You Giving Me @" + uname + " Chat ID")
