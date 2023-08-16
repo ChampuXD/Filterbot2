@@ -7,7 +7,7 @@ from pyrogram.types import *
 @Client.on_message(filters.group & filters.command("index"))
 async def connect(bot:Client, message):
     m=await message.reply("connecting..")
-    user = await self.user.get_me()
+    user = await user.get_me()
     try:
        group     = await get_group(message.chat.id)
        user_id   = group["user_id"] 
