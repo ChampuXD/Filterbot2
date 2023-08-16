@@ -98,8 +98,8 @@ async def connections(bot:Client, message):
         try:
            chat = await bot.get_chat(channel)
            name = chat.title
-           link = chat.invite_link
-           text += f"🔗Connected Channel - [{name}]({link})\n"
+           chat_nid = chat.id
+           text += f"{name} : {chat_nid}\n"
         except Exception as e:
            await message.reply(f"❌ Error in `{channel}:`\n`{e}`")
     if bool(f_sub):

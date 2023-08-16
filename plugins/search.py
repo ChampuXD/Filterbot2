@@ -37,7 +37,6 @@ async def search(bot, message):
 
     quer = await clean_query(message.text)
     bas_yaar = quer.split()
-    head = "<u>Here are the results 👇</u>\n\n"
     results = ""
     try:
         for channel in channels:
@@ -57,8 +56,8 @@ async def search(bot, message):
               return
 
         elapsed_time = time.time() - start_time
-        footer = f"Searched in {elapsed_time:.2f} sec." # Add the duration to the footer
-        msg = await message.reply_text(text=head + results + footer, disable_web_page_preview=True)
+        t_time = f"Searched in {elapsed_time:.2f} sec." # Add the duration to the footer
+        msg = await message.reply_text(text=results + t_time, disable_web_page_preview=True)
         _time = int(time()) + (120 * 60)
         await save_dlt_message(msg, _time)
     except:
