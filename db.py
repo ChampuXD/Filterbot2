@@ -13,10 +13,10 @@ user_col = db["USERS"]
 dlt_col  = db["Auto-Delete"]
 
 
-async def add_group(group_id, group_name, user_name, user_id, channels, f_sub, verified):
+async def add_group(group_id, group_name, user_name, user_id, channels, f_sub, verified,plan):
     data = {"_id": group_id, "name":group_name, 
             "user_id":user_id, "user_name":user_name,
-            "channels":channels, "f_sub":f_sub, "verified":verified}
+            "channels":channels, "f_sub":f_sub, "verified":verified,"plan":plan}
     try:
        await grp_col.insert_one(data)
     except DuplicateKeyError:
@@ -26,13 +26,6 @@ async def update_group(id, new_data):
     new_value = {"$set": new_data}
     await grp_col.update_one(data, new_value)
     
-async def plan_update(id, value): 
-  data = {"_id": id}
-  new_value = {"$set": value}
-  try:
-    await grp_col.insert_one(data, new_value)
-  except DuplicateKeyError:
-    pass
   
 async def delete_group(id):
     data = {"_id":id}
