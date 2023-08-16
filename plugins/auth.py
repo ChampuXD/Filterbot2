@@ -24,7 +24,7 @@ async def chat_id_check(bot:Client, m):
 async def auth_handle(bot:Client, m):
   if m.text == "/auth":
     await m.reply("Please Provide Group ID And Time Period like /auth Group ID Time ")
-  chat_id = int(m.text.split(None,1)[2])
+  chat_id = int(m.text.split(None,2)[1])
   group = await get_group(chat_id)
   user_id = group["user_id"]
   user_name = group["user_name"]
@@ -34,10 +34,11 @@ async def auth_handle(bot:Client, m):
   elif verified == False:
     id = chat_id
     current_time = datetime.now()
-    end_time = current_time + timedelta(days=m.text.split(None,2)[-1])
+    end_time = m.text.split(None,2)[-1]
+    ok = current_time + timedelta(days=end_time)
     await m.reply(f"user id: {user_id}\n username: @{user_name} group chat is verified!")
     await update_group(id,{"verified": True})
-    await plan_update(value=end_time)
+    await plan_update(value=ok)
     await bot.send_message(chat_id, f"This Group Verified By @{OWNER}")
   else:
     await m.reply("Verification Request Failed !!\nPlease Give Me Command in correct format\n **`/auth Group ID Time`**")
