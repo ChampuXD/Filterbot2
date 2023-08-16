@@ -23,8 +23,8 @@ async def chat_id_check(bot:Client, m):
 async def auth_handle(_, m):
   if m.text == "/auth":
     await m.reply("Please Provide Group ID And Time Period")
-  chat_id = m.text.split(None,1)[1]
-  group = await get_group(int(chat_id))
+  chat_id = int(m.text.split(None,1)[1])
+  group = await get_group(chat_id)
   user_id = group["user_id"]
   user_name = group["user_name"]
   verified = group["verified"]
