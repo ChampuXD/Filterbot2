@@ -46,3 +46,5 @@ class Bot(Client):
             LOGGER.info("Bot Stopped")
         except Exception as e:
             LOGGER.exception("Error while stopping bot: %s", str(e))
+
+User = Bot().user
