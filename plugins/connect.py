@@ -1,4 +1,4 @@
-from bot import Client
+from bot import Client, YaaraOP
 from db import *
 from config import *
 from pyrogram import *
@@ -7,7 +7,7 @@ from pyrogram.types import *
 @Client.on_message(filters.group & filters.command("index"))
 async def connect(bot:Client, message):
     m=await message.reply("connecting..")
-    user = await User.get_me()
+    user = await YaaraOP.get_me()
     try:
        group     = await get_group(message.chat.id)
        user_id   = group["user_id"] 

@@ -29,12 +29,11 @@ class Bot(Client):
             api_hash=API_HASH,
             bot_token=BOT_TOKEN,
             plugins={"root": "plugins"})
-        self.user = YaaraOP  # Store User client as an attribute
 
     async def start(self):
         try:
             await super().start()
-            await self.user.start()  # Start the User client
+            await YaaraOP.start()  # Start the User client
             LOGGER.info("Bot Started ⚡")
         except Exception as e:
             LOGGER.exception("Error while starting bot: %s", str(e))
@@ -42,7 +41,7 @@ class Bot(Client):
     async def stop(self, *args):
         try:
             await super().stop()
-            await self.user.stop()  # Stop the User client
+            await YaaraOP.stop()  # Stop the User client
             LOGGER.info("Bot Stopped")
         except Exception as e:
             LOGGER.exception("Error while stopping bot: %s", str(e))
