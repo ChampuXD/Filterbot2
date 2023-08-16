@@ -36,8 +36,8 @@ async def get_group(id):
     group = await grp_col.find_one(data)
     return dict(group)
     
-async def add_user(id, name, status):
-    data = {"_id":id, "name":name,"status": status}
+async def add_user(id, name):
+    data = {"_id":id, "name":name}
     try:
        await user_col.insert_one(data)
     except DuplicateKeyError:

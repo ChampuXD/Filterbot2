@@ -17,7 +17,7 @@ Press /help for more info!
 Press /buy to purchase a subscription!
 
 your chat id = {user.id}'''
-  await add_user(id=user.id, name=user.username, status=False)
+  await add_user(id=user.id, name=user.username)
   await m.reply(START_MSG)
 
 
