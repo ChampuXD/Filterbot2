@@ -48,7 +48,12 @@ async def add_user(id, name):
        await user_col.insert_one(data)
     except DuplicateKeyError:
       pass
-
+async def get_groups():
+    count  = await grp_col.count_documents({})
+    cursor = grp_col.find({})
+    list   = await cursor.to_list(length=int(count))
+    return count, list
+    
 async def get_users():
     count  = await user_col.count_documents({})
     cursor = user_col.find({})
