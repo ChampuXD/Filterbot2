@@ -26,7 +26,7 @@ async def update_group(id, new_data):
     new_value = {"$set": new_data}
     await grp_col.update_one(data, new_value)
     
-async plan_update(value): 
+async def plan_update(value): 
   data = {"time": value}
   try:
     await grp_col.insert_one(data)
