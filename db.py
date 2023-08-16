@@ -30,6 +30,11 @@ async def update_group(id, new_data):
 async def delete_group(id):
     data = {"_id":id}
     await grp_col.delete_one(data)
+
+async def check_plan(id):
+    data = {"user_id": id}
+    group = await grp_col.find_one(data)
+    return dict(group)
     
 async def get_group(id):
     data = {'_id':id}
