@@ -122,7 +122,3 @@ scheduler.start()
 
 # Run the event loop
 loop = asyncio.get_event_loop()
-try:
-    loop.run_forever()
-finally:
-    print("close scheduler")
