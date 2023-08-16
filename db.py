@@ -25,7 +25,8 @@ async def update_group(id, new_data, val):
     data = {"_id":id}
     new_value = {"$set":new_data}
     dat = {"$set": val}
-    await grp_col.update_one(data, new_value,dat)
+    await grp_col.update_one(data, new_value)
+    await grp_col.insert_one(data, val)
     
   
 async def delete_group(id):
