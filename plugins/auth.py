@@ -30,7 +30,7 @@ async def auth_handle(bot:Client, m):
   user_name = group["user_name"]
   verified = group["verified"]
   if verified == True:
-    await m.reply(f"user id: {user_id}\n username: @{username} group chat is already verified!")
+    await m.reply(f"user id: {user_id}\n username: @{user_name} group chat is already verified!")
   elif verified == False:
     id = chat_id
     current_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
