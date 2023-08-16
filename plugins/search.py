@@ -30,6 +30,9 @@ async def search(bot, message):
   f_sub = await force_sub(bot, message)
   if f_sub == False:
       return
+  verified = (await get_group(chat_id))["verified"]
+  if verified == True:
+    return 
   channels = (await get_group(chat_id))["channels"]
   if not channels:
       return
