@@ -2,10 +2,10 @@ import asyncio
 from db import *
 from time import time
 from bot import dbot
-
+import time 
 
 async def check_up(bot):   
-    _time = int(time()) 
+    _time = int(time.time()) 
     all_data = await get_all_dlt_data(_time)
     for data in all_data:
         try:
