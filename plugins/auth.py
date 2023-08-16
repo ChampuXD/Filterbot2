@@ -20,7 +20,7 @@ async def chat_id_check(bot:Client, m):
     uname = group.username 
     await m.reply("You Giving Me @" + uname + " Chat ID")
   
-@Client.on_message(filters.command("auth") & filters.private)
+@Client.on_message(filters.command("auth") & filters.private & filters.user(OWNER_ID))
 async def auth_handle(bot:Client, m):
   if m.text == "/auth":
     await m.reply("Please Provide Group ID And Time Period like /auth Group ID Time ")
@@ -39,7 +39,7 @@ async def auth_handle(bot:Client, m):
     timestamp = ok.strftime("%Y-%m-%d")
     await update_group(id, {"verified": True, "plan": timestamp})
     await m.reply(f"user id: {user_id}\n username: @{user_name} group chat is verified!")
-    await bot.send_message(chat_id, f"You Have Purchase A Plan By @{}")
+    await bot.send_message(chat_id, f"hey @{user_name} Purchase A Plan For {end_time}days ")
   else:
     await m.reply("Verification Request Failed !!\nPlease Give Me Command in correct format\n **`/auth Group ID Time`**")
   

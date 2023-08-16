@@ -12,6 +12,7 @@ async def info_handle(_, m):
   group = await check_plan(id)
   group_id = group["_id"]
   plan = group["plan"]
+  print(plan)
   name = m.from_user.mention
   if plan != "":
     await m.reply(f"Hey {name} Your Plan Validity {plan}")
