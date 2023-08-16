@@ -52,7 +52,7 @@ async def copy_msgs(br_msg, chat_id):
     except: 
        return False
        
-STATS = f"""My Status 💫
+STATS = """My Status 💫
 
 👥 Users: {}
 🧿 Groups: {}"""
