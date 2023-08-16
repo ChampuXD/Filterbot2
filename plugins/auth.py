@@ -17,7 +17,7 @@ async def chat_id_check(bot:Client, m):
   if nid ==None:
     await m.reply(CHECKING)
   else:  
-    await m.reply("You Giving Me" + uname + "Chat ID")
+    await m.reply("You Giving Me @" + uname + " Chat ID")
   
 @Client.on_message(filters.command("auth") & filters.private)
 async def auth_handle(_, m):
