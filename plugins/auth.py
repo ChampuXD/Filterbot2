@@ -30,7 +30,7 @@ async def auth_handle(_, m):
   verified = group["verified"]
   if verified == True:
     await m.reply(f"user id: {user_id}\n username: @{username} group chat is already verified!")
-  elif verified = False:
+  elif verified == False:
     id = chat_id
     await update_group(id,{"verified": True})
     await bot.send_message(chat_id, f"This Group Verified By @{OWNER}")
