@@ -6,7 +6,7 @@ from pyrogram.types import *
 
 @Client.on_message(filters.group & filters.command("index"))
 async def connect(bot:Client, message):
-    m=await message.reply("connecting..")
+    m=await message.reply("Please wait..")
     user = await YaaraOP.get_me()
     try:
        group     = await get_group(message.chat.id)
@@ -23,7 +23,7 @@ async def connect(bot:Client, message):
     try:
        channel = int(message.command[-1])
        if channel in channels:
-          return await message.reply("This channel is already connected! You Cant Connect Again")
+          return await message.reply("This channel is already index! You Cant Connect Again")
        channels.append(channel)
     except:
        return await m.edit("❌ Incorrect format!\nUse `/index ChannelID`")    
@@ -40,7 +40,7 @@ async def connect(bot:Client, message):
           text = f"❌ Error: `{str(e)}`\nMake sure I'm admin in that channel & this group with all permissions and @{(user.username or user.mention)} is not banned there"
           return await m.edit(text)
     await update_group(message.chat.id, {"channels":channels})
-    await m.edit(f"✅ Successfully connected to [{chat.title}]({c_link})!", disable_web_page_preview=True)
+    await m.edit(f"✅ Successfully indexed to [{chat.title}]({c_link})!", disable_web_page_preview=True)
     text = f"#NewConnection\n\nUser: {message.from_user.mention}\nGroup: [{group.title}]({g_link})\nChannel: [{chat.title}]({c_link})"
     await bot.send_message(chat_id=LOG_CHANNEL, text=text)
 
@@ -66,7 +66,7 @@ async def disconnect(bot:Client, message):
           return await m.edit("You didn't added this channel yet Or Check Channel Id")
        channels.remove(channel)
     except:
-       return await m.edit("❌ Incorrect format!\nUse `/disconnect ChannelID`")
+       return await m.edit("❌ Incorrect format!\nUse `/remove ChannelID`")
     try:
        chat   = await bot.get_chat(channel)
        group  = await bot.get_chat(message.chat.id)
@@ -77,7 +77,7 @@ async def disconnect(bot:Client, message):
        text = f"❌ Error: `{str(e)}`\nMake sure I'm admin in that channel & this group with all permissions and @{(user.username or user.mention)} is not banned there"
        return await m.edit(text)
     await update_group(message.chat.id, {"channels":channels})
-    await m.edit(f"✅ Successfully disconnected from [{chat.title}]({c_link})!", disable_web_page_preview=True)
+    await m.edit(f"✅ Successfully removed from [{chat.title}]({c_link})!", disable_web_page_preview=True)
     text = f"#DisConnection\n\nUser: {message.from_user.mention}\nGroup: [{group.title}]({g_link})\nChannel: [{chat.title}]({c_link})"
     await bot.send_message(chat_id=LOG_CHANNEL, text=text)
 
@@ -92,8 +92,8 @@ async def connections(bot:Client, message):
     if message.from_user.id!=user_id:
        return await message.reply(f"Only @{user_name} can use this command 😁")
     if bool(channels)==False:
-       return await message.reply("This group is currently not connected to any channels!\nConnect one using /index")
-    text = "This Group is currently connected to:\n\n"
+       return await message.reply("This group is currently not index to any channels!\nConnect one using /index")
+    text = "This Group is currently indexed to:\n\n"
     for channel in channels:
         try:
            chat = await bot.get_chat(channel)
