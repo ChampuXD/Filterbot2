@@ -46,19 +46,12 @@ async def search(bot, message):
                   name = (msg.text or msg.caption).split("\n")[0]
                   if name in results:
                     continue
-                  results += f"<b><i> {name}\n {msg.link}</i></b>\n\n"
+                  results += f" {name}\n {msg.link}\n\n"
 
           if not results:
-            # Send message if no results are found
-              query_encoded = urllib.parse.quote_plus(query)
-              no_results_message = f"No Results Found For <b>{query}</b>\n\n"
-            google_url = f"https://www.google.com/search?q={query_encoded}+movie"
-              release_date_url = f"https://www.google.com/search?q={query_encoded}+release+date"
-              markup = InlineKeyboardMarkup([
-                [InlineKeyboardButton("Check Spelling on Google 🔍", url=google_url)],
-                [InlineKeyboardButton("Check Release Date on Google 📅", url=release_date_url)]
-            ])
-              msg = await message.reply_text(text=no_results_message, disable_web_page_preview=True, reply_markup=markup)
+              no_results_message = f"No Results Found 🔎 \n\n"
+            
+              msg = await message.reply_text(text=no_results_message, disable_web_page_preview=True)
               _time = int(time()) + (2 * 60)
               await save_dlt_message(msg, _time)
               return
