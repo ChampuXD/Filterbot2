@@ -9,7 +9,7 @@ CHECKING = "Please Provide Me In Correct Format /check <chat id>"
 
 
 @Client.on_message(filters.command("check") & filters.user(OWNER_ID))
-async def chat_id_check(_, m):
+async def chat_id_check(bot:Client, m):
   chat_id = m.chat.id
   nid = m.text.split(None,1)[1]
   group = await bot.get_chat(nid)
