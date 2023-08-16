@@ -23,7 +23,7 @@ async def add_group(group_id, group_name, user_name, user_id, channels, f_sub, v
        pass
 async def update_group(id, new_data, val):
     data = {"_id":id}
-    new_value = {"$set": new_data, val}
+    new_value = {"$set": new_data,"$set": val}
     await grp_col.update_one(data, new_value)
     
   
