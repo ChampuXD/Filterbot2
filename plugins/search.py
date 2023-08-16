@@ -64,5 +64,3 @@ async def search(bot, message):
       await message.reply("No Movie Found 🔎")
       _time = int(time()) + (120 * 60)
       await save_dlt_message(msg, _time)
-  except Exception as e:
-      print(e)
