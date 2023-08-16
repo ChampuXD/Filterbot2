@@ -14,8 +14,8 @@ async def chat_id_check(bot:Client, m):
   if m.text == "/check":
     await m.reply(CHECKING)
   else:
-    nind = m.text.split(None,1)[1]
-    group = await bot.get_chat(int(nid))
+    n_id = int(m.text.split(None,1)[1])
+    group = await bot.get_chat(n_id)
     uname = group.username 
     await m.reply("You Giving Me @" + uname + " Chat ID")
   
