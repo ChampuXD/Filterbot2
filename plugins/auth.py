@@ -36,7 +36,8 @@ async def auth_handle(bot:Client, m):
     current_time = datetime.now()
     end_time = int(m.text.split(None,2)[-1])
     ok = current_time + timedelta(days=end_time)
-    await update_group(id,{"verified": True},{"plan": ok})
+    timestamp = datetime.strptime(ok, "%Y-%m-%dT%H:%M:%S.%f+00:00")
+    await update_group(id,{"verified": True},{"plan": timestamp})
     await m.reply(f"user id: {user_id}\n username: @{user_name} group chat is verified!")
     await bot.send_message(chat_id, f"This Group Verified By @{OWNER}")
   else:
