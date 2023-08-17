@@ -6,16 +6,15 @@ from bot import dbot
 
 async def check_up(bot):   
     _time = int(time.time()) 
-    all_data = await get_all_dlt_data['chat_id']
+    all_data = await get_all_dlt_data(_time)
     for data in all_data:
-        try:
-          if data['_time'] < _time:
-            await bot.delete_messages(chat_id=data["chat_id"],
+      try:
+        await bot.delete_messages(chat_id=data["chat_id"],
                                      message_ids=data["message_id"])           
-        except Exception as e:
-           err=data
-           err["❌ Error"]=str(e)
-           print(err)
+      except Exception as e:
+        err=data
+        err["❌ Error"]=str(e)
+        print(err)
     await delete_all_dlt_data(_time)
 
 async def run_check_up():
