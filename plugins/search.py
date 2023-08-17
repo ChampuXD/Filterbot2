@@ -63,9 +63,17 @@ async def search(bot, message):
       _time = int(time.time())
       await save_dlt_message(msg, _time)
       await add_del(msg_id=msg)
+      try:
+        get_db = del_msg(id=chat_id)
+        mode = get_db['mode']
+        if mode == True:
+          asyncio.sleep(600)
+          await msg.delete()
+      except:
+        print("no delete")
       
   else:
       x = await message.reply("No Movie Found 🔎")
       await asyncio.sleep(5)
       await x.delete()
-  
+    
