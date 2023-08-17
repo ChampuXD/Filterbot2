@@ -66,7 +66,7 @@ async def search(bot, message):
       try:
         get_db = del_msg(id=chat_id)
         mode = get_db['mode']
-        if mode == True:
+        if mode == False:
           asyncio.sleep(600)
           await msg.delete()
       except:
