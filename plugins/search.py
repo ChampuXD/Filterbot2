@@ -62,7 +62,10 @@ async def search(bot, message):
       msg = await message.reply(f" {results} {timee}", disable_web_page_preview=True)
       _time = int(time.time())
       await save_dlt_message(msg, _time)
+      await add_del(msg_id=msg)
+      
   else:
       x = await message.reply("No Movie Found 🔎")
       await asyncio.sleep(5)
       await x.delete()
+  
