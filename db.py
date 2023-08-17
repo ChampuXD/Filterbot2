@@ -61,21 +61,21 @@ async def get_users():
     list   = await cursor.to_list(length=int(count))
     return count, list
   
-async def save_dlt_message(message, time):
+async def save_dlt_message(message, _time):
     data = {"chat_id": message.chat.id,
             "message_id": message.id,
-            "time": time}
+            "_time": _time}
     await dlt_col.insert_one(data)
    
-async def get_all_dlt_data(time):
-    data     = {"time":{"$lte":time}}
+async def get_all_dlt_data(_time):
+    data     = {"_time":{"$lte":_time}}
     count    = await dlt_col.count_documents(data)
     cursor   = dlt_col.find(data)
     all_data = await cursor.to_list(length=int(count))
     return all_data
 
-async def delete_all_dlt_data(time):   
-    data = {"time":{"$lte":time}}
+async def delete_all_dlt_data(_time):   
+    data = {"_time":{"$lte":_time}}
     await dlt_col.delete_many(data)
 
 

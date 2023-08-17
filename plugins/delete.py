@@ -14,7 +14,7 @@ async def check_up(bot):
     for data in all_data:
         try:
             # Calculate the timestamp for 5 minutes from now
-            time_to_delete = data["time"] + five_minutes.total_seconds()
+            time_to_delete = data["_time"] + five_minutes.total_seconds()
             
             # Delete messages older than 5 minutes
             if _time > time_to_delete:
