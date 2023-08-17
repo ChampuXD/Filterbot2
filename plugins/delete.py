@@ -1,36 +1,27 @@
+import asyncio
 from db import *
 from time import time
 from bot import dbot
-import time 
-from datetime import timedelta
+
 
 async def check_up(bot):   
-    _time = int(time.time()) 
-    all_data = await get_all_dlt_data['_time']
-    
-    # Define a timedelta for 10 minutes
-    five_minutes = timedelta(minutes=2)
-    
+    _time = int(time()) 
+    all_data = await get_all_dlt_data(_time)
     for data in all_data:
         try:
-            # Calculate the timestamp for 5 minutes from now
-            time_to_delete = data["_time"] + five_minutes.total_seconds()
-            
-            # Delete messages older than 5 minutes
-            if _time > time_to_delete:
-                await bot.delete_messages(chat_id=data["chat_id"], message_ids=data["message_id"])
+           await bot.delete_messages(chat_id=data["chat_id"],
+                                     message_ids=data["message_id"])           
         except Exception as e:
-            err = data
-            err["❌ Error"] = str(e)
-            print(err)
-            
+           err=data
+           err["❌ Error"]=str(e)
+           print(err)
     await delete_all_dlt_data(_time)
 
 async def run_check_up():
     async with dbot as bot: 
         while True:  
-            await check_up(bot)
-            await asyncio.sleep(1)
+           await check_up(bot)
+           await asyncio.sleep(1)
     
-if __name__ == "__main__":   
-    asyncio.run(run_check_up())
+if __name__=="__main__":   
+   asyncio.run(run_check_up())
