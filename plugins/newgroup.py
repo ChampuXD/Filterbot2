@@ -24,6 +24,8 @@ async def new_group(bot:Client, message):
        try:
          await bot.send_message(chat_id=LOG_CHANNEL, text=text)
          await sleep(60)
-        except Exception as e:
-          await bot.send_message(OWNER_ID,e)
-        await m.delete()
+       except Exception as e:
+         omk =await bot.send_message(OWNER_ID,e)
+         await omk.delete()
+         await bot.send_message(OWNER_ID, text=text)
+       await m.delete()
