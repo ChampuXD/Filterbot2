@@ -31,8 +31,8 @@ async def search(bot, message):
   if f_sub == False:
       return
   verified = (await get_group(chat_id))["verified"]
-  if verified == True:
-    continue
+  if verified == False:
+    return 
   channels = (await get_group(chat_id))["channels"]
   if not channels:
       return
