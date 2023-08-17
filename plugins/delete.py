@@ -6,7 +6,7 @@ from bot import dbot
 
 async def check_up(bot):   
     _time = int(time.time()) 
-    all_data = await get_all_dlt_data(_time)
+    all_data = await get_all_dlt_data['chat_id']
     for data in all_data:
         try:
           if data['_time'] < _time:
