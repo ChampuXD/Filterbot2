@@ -6,7 +6,7 @@ from pymongo.errors import DuplicateKeyError
 from pyrogram.errors import UserNotParticipant
 from motor.motor_asyncio import AsyncIOMotorClient as MongoClient
 from pyrogram.types import ChatPermissions, InlineKeyboardMarkup, InlineKeyboardButton
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
+import schedule
 
 dbclient = MongoClient(DATABASE_URI)
 db       = dbclient["Filter-Bot"]
@@ -122,11 +122,12 @@ async def update_documents():
         id = await grp_col.find({"user_id":doc[user_id]})
         await Client.send_message(id,"Hey Your Plan Expired Today Now")
 
-scheduler = AsyncIOScheduler()
-scheduler.add_job(update_documents, "interval", minutes=1)  # Run the task daily
+schedule.every().day.at("00:00").do(update_documents)
+ 
+
 
 # Start the scheduler
-scheduler.start()
+schedule.start()
 
 # Run the event loop
 loop = asyncio.get_event_loop()
