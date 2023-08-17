@@ -14,11 +14,10 @@ async def check_up(bot):
     for data in all_data:
         try:
             # Calculate the timestamp for 5 minutes from now
-            #time_to_delete = data["time"] + five_minutes.total_seconds()
+            time_to_delete = data["time"] + five_minutes.total_seconds()
             
             # Delete messages older than 5 minutes
-            #if _time > time_to_delete:
-            if _time > data['time']:
+            if _time > time_to_delete:
                 await bot.delete_messages(chat_id=data["chat_id"], message_ids=data["message_id"])
         except Exception as e:
             err = data

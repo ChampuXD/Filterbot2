@@ -1,5 +1,4 @@
 import asyncio
-from datetime import timedelta 
 from time import time
 from bot import Client, YaaraOP
 from db import *
@@ -61,13 +60,11 @@ async def search(bot, message):
       omk = end - star
       timee = f"Result Searched in {omk:.02} sec"
       msg = await message.reply(f" {results} {timee}", disable_web_page_preview=True)
-      tt_time = int(time.time())
-      five_minutes = timedelta(minutes=2)
-      _time = tt_time + five_minutes.total_seconds()
+      _time = int(time.time())
       await save_dlt_message(msg, _time)
       
   else:
       x = await message.reply("No Movie Found 🔎")
-      await asyncio.sleep(5)
+      await asyncio.sleep(10)
       await x.delete()
     
