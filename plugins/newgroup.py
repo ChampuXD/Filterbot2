@@ -1,4 +1,4 @@
-from config import LOG_CHANNEL
+from config import LOG_CHANNEL, OWNER_ID 
 from db import *
 from asyncio import sleep
 from pyrogram import *
