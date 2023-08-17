@@ -6,18 +6,19 @@ from datetime import timedelta
 
 async def check_up(bot):   
     _time = int(time.time()) 
-    all_data = await get_all_dlt_data(_time)
+    all_data = await get_all_dlt_data['_time']
     
-    # Define a timedelta for 5 minutes
-    five_minutes = timedelta(minutes=5)
+    # Define a timedelta for 10 minutes
+    five_minutes = timedelta(minutes=2)
     
     for data in all_data:
         try:
             # Calculate the timestamp for 5 minutes from now
-            time_to_delete = data["time"] + five_minutes.total_seconds()
+            #time_to_delete = data["time"] + five_minutes.total_seconds()
             
             # Delete messages older than 5 minutes
-            if _time > time_to_delete:
+            #if _time > time_to_delete:
+            if _time > data['time']
                 await bot.delete_messages(chat_id=data["chat_id"], message_ids=data["message_id"])
         except Exception as e:
             err = data

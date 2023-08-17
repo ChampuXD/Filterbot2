@@ -60,17 +60,10 @@ async def search(bot, message):
       omk = end - star
       timee = f"Result Searched in {omk:.02} sec"
       msg = await message.reply(f" {results} {timee}", disable_web_page_preview=True)
-      _time = int(time.time())
+      tt_time = int(time.time())
+      five_minutes = timedelta(minutes=2)
+      _time = tt_time + five_minutes.total_seconds()
       await save_dlt_message(msg, _time)
-      await add_del(msg_id=msg)
-      try:
-        get_db = del_msg(id=chat_id)
-        mode = get_db['mode']
-        if mode == False:
-          asyncio.sleep(600)
-          await msg.delete()
-      except:
-        print("no delete")
       
   else:
       x = await message.reply("No Movie Found 🔎")
