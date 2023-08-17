@@ -1,6 +1,6 @@
 import asyncio
 from config import *
-from bot import * 
+from bot import Client as bot
 from pyrogram import enums
 from pymongo.errors import DuplicateKeyError
 from pyrogram.errors import UserNotParticipant
@@ -120,14 +120,8 @@ async def update_documents():
     for doc in documents_to_update:
         await grp_col.update_one({"_id": doc["_id"]}, {"$set": {"verified": False}})
         id = await grp_col.find({"user_id":doc[user_id]})
-        await Client.send_message(id,"Hey Your Plan Expired Today Now")
+        await bot.send_message(id,"Hey Your Plan Expired Today Now")
 
 schedule.every().day.at("00:00").do(update_documents)
  
-
-
-# Start the scheduler
-schedule.start()
-
-# Run the event loop
-loop = asyncio.get_event_loop()
+asyncio.get_event_loop()
