@@ -26,17 +26,16 @@ async def main():
             current_time = oki.replace(second=0,microsecond=0).strftime("%y-%m-%d %H:%M")
             print(current_time)
             d_find = del_find(current_time)
-            if current_time >= d_find['time']:
-              for dati in d_find:
-                print(dati)
-                chat_id = d_find["chat_id"]
-                message_id = d_find["message_id"]
+            if current_time >= d_find['time']: 
+              print(dati)
+              chat_id = d_find["chat_id"]
+              message_id = d_find["message_id"]
 
-                # Delete the message
-                await dbot.delete_messages(chat_id, message_id)
+             # Delete the message
+             await dbot.delete_messages(chat_id, message_id)
 
-                # Remove the message data from MongoDB
-                del_col.delete_one({"_id": del_find["_id"]})
+            # Remove the message data from MongoDB
+            del_col.delete_one({"_id": del_find["_id"]})
 
         except Exception as e:
             print("Error:", e)
@@ -51,4 +50,4 @@ async def main():
             
 if __name__ == "__main__":
     asyncio.get_event_loop()
-    dbot.run()
+    dbot.start()
