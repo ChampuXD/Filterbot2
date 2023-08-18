@@ -61,9 +61,9 @@ async def get_users():
     list   = await cursor.to_list(length=int(count))
     return count, list
   
-async def save_dlt_message(message, _time):
-        data = {"chat_id": message.chat.id,
-                "message_id": message.id,
+async def save_dlt_message(chat_id, msg, _time):
+        data = {"chat_id": chat_id,
+                "message_id": msg,
                 "_time": _time}
         await dlt_col.insert_one(data)
     
