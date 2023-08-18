@@ -56,12 +56,12 @@ async def search(bot, message):
                   results += new_results
     
   if results:
-      end = time.time()
-      omk = end - star
-      timee = f"Result Searched in {omk:.02} sec"
-      msg = await message.reply(f" {results} {timee}", disable_web_page_preview=True)
-      _time = time.time() + (2*60)
-      await save_dlt_message(msg, _time)
+          end = time.time()
+          omk = end - star
+          timee = f"Result Searched in {omk:.2f} sec"  
+          msg = await message.reply(f" {results} {timee}", disable_web_page_preview=True)
+          _time = int(time.time()) + (2 * 60)  # Use int(time()) instead of time.time() and add 2 minutes in seconds
+          await save_dlt_message(msg, _time)
       
   else:
       x = await message.reply("No Movie Found 🔎")
