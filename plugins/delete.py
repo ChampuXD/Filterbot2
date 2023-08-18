@@ -24,6 +24,7 @@ async def delete_messages():
             # Get current time
             oki = datetime.now()
             current_time = oki.replace(second=0,microsecond=0).strftime("%y-%m-%d %H:%M")
+            print(current_time)
             d_find = del_find(current_time)
             for dati in d_find:
               print(dati)
