@@ -65,7 +65,7 @@ async def push_db(chat_id, message_id, n_time):
   data = {"chat_id":chat_id, "message_id": message_id, "time": n_time}
   await dlt_col.insert_one(data)
 
-async def del_find(time):
+async def del_find(current_time):
   data = del_col.find({"time": {"$lte": current_time}})
   return data
 
