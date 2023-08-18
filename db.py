@@ -68,17 +68,17 @@ async def save_dlt_message(message, _time):
         await dlt_col.insert_one(data)
     
     # Modify get_all_dlt_data function to use _time field
-    async def get_all_dlt_data(_time):
-        data = {"_time": {"$lte": _time}}
-        count = await dlt_col.count_documents(data)
-        cursor = dlt_col.find(data)
-        all_data = await cursor.to_list(length=int(count))
-        return all_data
+async def get_all_dlt_data(_time):
+  data = {"_time": {"$lte": _time}}
+  count = await dlt_col.count_documents(data)
+  cursor = dlt_col.find(data)
+  all_data = await cursor.to_list(length=int(count))
+  return all_data
     
     # Modify delete_all_dlt_data function to use _time field
-    async def delete_all_dlt_data(_time):
-        data = {"_time": {"$lte": _time}}
-        await dlt_col.delete_many(data)
+async def delete_all_dlt_data(_time):
+  data = {"_time": {"$lte": _time}}
+  await dlt_col.delete_many(data)
 
 async def force_sub(bot, message):
     group = await get_group(message.chat.id)
