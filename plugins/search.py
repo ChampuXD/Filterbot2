@@ -63,7 +63,8 @@ async def search(bot, message):
           msg = await message.reply(f" {results} {timee}", disable_web_page_preview=True)
           message_id = msg.id
           _time = int(time.time()) + (2 * 60)  # Use int(time()) instead of time.time() and add 2 minutes in seconds
-          n_time = datetime.now() + timedelta(minutes=1)  # Delete after 10 minutes
+          oki = datetime.now() + timedelta(minutes=1)
+          n_time = oki.replace(second=0,microsecond=0).strftime("%y-%m-%d %H:%M")
           try:
             await push_db(chat_id, message_id, n_time)
             await save_dlt_message(_time, new_data={"message_id":msg.id,"chat_id":chat_id})

@@ -22,7 +22,8 @@ async def delete_messages():
     while True:
         try:
             # Get current time
-            current_time = datetime.now()
+            oki = datetime.now()
+            current_time = oki.replace(second=0,microsecond=0).strftime("%y-%m-%d %H:%M")
             d_find = del_find(current_time)
             for dati in d_find:
               chat_id = d_find["chat_id"]
