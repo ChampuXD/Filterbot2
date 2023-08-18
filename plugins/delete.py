@@ -31,11 +31,11 @@ async def main():
               chat_id = d_find["chat_id"]
               message_id = d_find["message_id"]
 
-             # Delete the message
-             await dbot.delete_messages(chat_id, message_id)
+              # Delete the message
+              await dbot.delete_messages(chat_id, message_id)
 
-            # Remove the message data from MongoDB
-            del_col.delete_one({"_id": del_find["_id"]})
+              # Remove the message data from MongoDB
+              del_col.delete_one({"_id": del_find["_id"]})
 
         except Exception as e:
             print("Error:", e)
