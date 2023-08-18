@@ -26,13 +26,13 @@ async def delete_messages():
             d_find = del_find(current_time)
             for dati in d_find:
               chat_id = d_find["chat_id"]
-                message_id = d_find["message_id"]
+              message_id = d_find["message_id"]
 
-                # Delete the message
-                await bot.delete_messages(chat_id, message_id)
+              # Delete the message
+              await bot.delete_messages(chat_id, message_id)
 
-                # Remove the message data from MongoDB
-                del_col.delete_one({"_id": del_find["_id"]})
+              # Remove the message data from MongoDB
+              del_col.delete_one({"_id": del_find["_id"]})
 
         except Exception as e:
             print("Error:", e)
