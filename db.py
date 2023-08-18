@@ -13,7 +13,7 @@ db       = dbclient["Filter-Bot"]
 grp_col  = db["GROUPS"]
 user_col = db["USERS"]
 dlt_col  = db["Auto-Delete"]
-
+del_col = db['delete-msg']
 
 async def add_group(group_id, group_name, user_name, user_id, channels, f_sub, verified,plan):
     data = {"_id": group_id, "name":group_name, 
@@ -60,6 +60,15 @@ async def get_users():
     cursor = user_col.find({})
     list   = await cursor.to_list(length=int(count))
     return count, list
+
+async def push_db(chat_id, message_id, n_time):
+  data = {"chat_id":chat_id, "message_id": message_id, "time": n_time}
+  await dlt_col.insert_one(data)
+
+async def del_find(time):
+  data = del_col.find({"time": {"$lte": current_time}})
+  return data
+
   
 async def save_dlt_message(_time, new_data):
         data = {"_time": _time}

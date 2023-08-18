@@ -1,4 +1,5 @@
-from time import time 
+from time import time
+from datetime in datetime 
 import time 
 from bot import dbot as bot
 from db import * 
@@ -17,6 +18,27 @@ async def check_up(bot):
             pass
     await delete_all_dlt_data(_time)
 
+async def delete_messages():
+    while True:
+        try:
+            # Get current time
+            current_time = datetime.now()
+            d_find = del_find(current_time)
+            for dati in d_find:
+              chat_id = d_find["chat_id"]
+                message_id = d_find["message_id"]
+
+                # Delete the message
+                await bot.delete_messages(chat_id, message_id)
+
+                # Remove the message data from MongoDB
+                del_col.delete_one({"_id": del_find["_id"]})
+
+        except Exception as e:
+            print("Error:", e)
+
+        await asyncio.sleep(1)
+
 # Main function to run the check_up function
 async def run_check_up():
     async with bot:
@@ -24,4 +46,4 @@ async def run_check_up():
         await asyncio.sleep(1)
             
 if __name__ == "__main__":
-    asyncio.run(run_check_up())
+    asyncio.get_event_loop().create_task(delete_messages())
