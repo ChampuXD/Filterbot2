@@ -20,9 +20,8 @@ async def check_up(bot):
 # Main function to run the check_up function
 async def run_check_up():
     async with bot:
-        while True:
-            await check_up(bot)
-            await asyncio.sleep(1)
+        await check_up(bot)
+        await asyncio.sleep(1)
             
 if __name__ == "__main__":
     asyncio.run(run_check_up())
