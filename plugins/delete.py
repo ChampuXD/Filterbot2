@@ -19,7 +19,8 @@ async def check_up(bot):
 
 async def run_check_up():
     async with dbot as bot: 
-        while True:  
+        while True:
+          await bot.start()
            await check_up(bot)
            await asyncio.sleep(1)
     
