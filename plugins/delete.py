@@ -26,6 +26,7 @@ async def delete_messages():
             current_time = oki.replace(second=0,microsecond=0).strftime("%y-%m-%d %H:%M")
             d_find = del_find(current_time)
             for dati in d_find:
+              print(dati)
               chat_id = d_find["chat_id"]
               message_id = d_find["message_id"]
 
