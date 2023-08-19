@@ -1,4 +1,3 @@
-from bot import Bot, dbot
+from bot import Bot
 Bot().run()
-dbot.run()
 print("Bot Started 💥")
