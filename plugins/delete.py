@@ -4,11 +4,11 @@ import time
 from db import *
 from pyrogram import *
 
-dbot = Client("testbot", api_id=API_ID,
+bot = Client("testbot", api_id=API_ID,
               api_hash=API_HASH,
               bot_token=BOT_TOKEN)
 
-'''async def check_up(bot):
+async def check_up(bot):
     _time = int(time())  # Use int(time()) instead of int(time.time())
     all_data = await get_all_dlt_data(_time)
     for data in all_data:
@@ -20,9 +20,9 @@ dbot = Client("testbot", api_id=API_ID,
         except Exception as e:
             print(f"Error deleting message_id {message_id} from chat_id {chat_id}: {str(e)}")
             pass
-    await delete_all_dlt_data(_time)'''
+    await delete_all_dlt_data(_time)
 
-async def main():
+'''async def main():
   try:
     # Get current time
     oki = datetime.now()
@@ -43,13 +43,13 @@ async def main():
   except Exception as e:
     print("Error:", e)
 
-    await asyncio.sleep(30)
+    await asyncio.sleep(30)'''
 
 # Main function to run the check_up function
-'''async def run_check_up():
+async def run_check_up():
     async with bot:
         await check_up(bot)
-        await asyncio.sleep(1)'''
+        await asyncio.sleep(30)
             
 if __name__ == "__main__":
     dbot.start()
