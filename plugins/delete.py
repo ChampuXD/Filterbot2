@@ -2,7 +2,9 @@ from time import time
 from datetime import datetime 
 import time 
 from bot import dbot
-from db import * 
+from db import *
+from pyrogram import *
+
 
 '''async def check_up(bot):
     _time = int(time())  # Use int(time()) instead of int(time.time())
