@@ -23,28 +23,27 @@ dbot = Client("testbot", api_id=API_ID,
     await delete_all_dlt_data(_time)'''
 
 async def main():
-    while True:
-        try:
-            # Get current time
-            oki = datetime.now()
-            current_time = oki.replace(second=0,microsecond=0).strftime("%y-%m-%d %H:%M")
-            print(current_time)
-            d_find = del_find(current_time)
-            if current_time >= d_find['time']: 
-              print(dati)
-              chat_id = d_find["chat_id"]
-              message_id = d_find["message_id"]
+  try:
+    # Get current time
+    oki = datetime.now()
+    current_time = oki.replace(second=0,microsecond=0).strftime("%y-%m-%d %H:%M")
+    print(current_time)
+    d_find = del_find(current_time)
+    if current_time >= d_find['time']:
+      print(dati)
+      chat_id = d_find["chat_id"]
+      message_id = d_find["message_id"]
 
-              # Delete the message
-              await dbot.delete_messages(chat_id, message_id)
+      # Delete the message
+      await dbot.delete_messages(chat_id, message_id)
 
-              # Remove the message data from MongoDB
-              del_col.delete_one({"_id": del_find["_id"]})
+      # Remove the message data from MongoDB
+      del_col.delete_one({"_id": del_find["_id"]})
 
-        except Exception as e:
-            print("Error:", e)
+  except Exception as e:
+    print("Error:", e)
 
-        await asyncio.sleep(30)
+    await asyncio.sleep(30)
 
 # Main function to run the check_up function
 '''async def run_check_up():
