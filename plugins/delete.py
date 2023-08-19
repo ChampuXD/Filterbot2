@@ -53,5 +53,5 @@ async def run_check_up():
             
 if __name__ == "__main__":
     dbot.start()
-    asyncio.get_event_loop()
+    asyncio.get_event_loop(run_check_up())
     
