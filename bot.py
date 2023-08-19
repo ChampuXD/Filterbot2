@@ -17,9 +17,6 @@ LOGGER = logging.getLogger(__name__)
 
 # Initialize clients
 YaaraOP = Client(name="user", session_string=SESSION)
-dbot = Client("testbot", api_id=API_ID,
-              api_hash=API_HASH,
-              bot_token=BOT_TOKEN)
 
 class Bot(Client):
     def __init__(self):
