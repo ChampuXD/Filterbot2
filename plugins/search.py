@@ -64,7 +64,8 @@ async def search(bot, message):
           msg = await message.reply(f" {results} {timee}", disable_web_page_preview=True)
           _time = int(time.time()) + (2 * 60)
           try:
-            await save_dlt_message(_time, msg.id)
+            message_id = msg.id
+            await save_dlt_message(_time, message_id)
           except Exception as e:
             print(e)
       
