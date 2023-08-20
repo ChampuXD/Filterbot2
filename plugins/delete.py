@@ -37,6 +37,6 @@ async def plan_update():
       print(data)
     
 scheduler = AsyncIOScheduler()
-scheduler.add_job(job, "interval", seconds=3)
+scheduler.add_job(plan_update, "interval", seconds=3)
 
 scheduler.start()
