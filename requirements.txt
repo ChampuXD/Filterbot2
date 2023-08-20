@@ -3,5 +3,3 @@ tgcrypto==1.2.5
 motor[srv]
 dnspython==2.4.2
 httpcore==0.13.6
-apscheduler
-tzdata
