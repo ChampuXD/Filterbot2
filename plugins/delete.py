@@ -22,6 +22,6 @@ async def run_check_up():
         while True:  
            await check_up(bot)
            await asyncio.sleep(1)
-    
+dbot.start()   
 loop = asyncio.get_event_loop()
 loop.create_task(run_check_up())

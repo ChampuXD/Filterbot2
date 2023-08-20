@@ -30,7 +30,6 @@ class Bot(Client):
     async def start(self):
         try:
             await super().start()
-            await dbot.start()
             await YaaraOP.start()  # Start the User client
             LOGGER.info("Bot Started ⚡")
         except Exception as e:
@@ -39,7 +38,6 @@ class Bot(Client):
     async def stop(self, *args):
         try:
             await super().stop()
-            await dbot.stop()
             await YaaraOP.stop()  # Stop the User client
             LOGGER.info("Bot Stopped")
         except Exception as e:
