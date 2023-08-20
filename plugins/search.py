@@ -33,7 +33,7 @@ async def search(bot, message):
       return
   verified = (await get_group(chat_id))["verified"]
   if verified == False:
-    return await m.reply(f"Sorry Your Plan Expired Please Contact To My Owner @{OWNER})
+    return await m.reply(f"You Didn't Purchase Any Plan...Contact To My Owner @{OWNER})
   channels = await get_group(chat_id)["channels"]
   if not channels:
       return
