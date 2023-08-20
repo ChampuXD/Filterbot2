@@ -15,7 +15,7 @@ user_col = db["USERS"]
 dlt_col  = db["Auto-Delete"]
 del_col = db['delete-msg']
 
-async def del_find(chat_id):
+async def del_finds(chat_id):
   data = del_col.find({"chat_id": {"$lte": chat_id}})
   return data
   

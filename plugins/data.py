@@ -8,7 +8,7 @@ from db import *
 async def db_retrieve(_, m):
   chat_id = m.text.split(None,1)[1]
   results = "Your Data Here\n"
-  ok = del_find(chat_id)
+  ok = del_finds(chat_id)
   for data in ok:
     results += data
   print(results)
