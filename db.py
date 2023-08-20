@@ -6,7 +6,6 @@ from pymongo.errors import DuplicateKeyError
 from pyrogram.errors import UserNotParticipant
 from motor.motor_asyncio import AsyncIOMotorClient as MongoClient
 from pyrogram.types import ChatPermissions, InlineKeyboardMarkup, InlineKeyboardButton
-import schedule
 
 dbclient = MongoClient(DATABASE_URI)
 db       = dbclient["Filter-Bot"]
