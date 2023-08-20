@@ -51,6 +51,6 @@ async def main():
         await check_up(bot)'''
             
 '''if __name__ == "__main__":'''
-dbot.start()
+bot.start()
 asyncio.create_task(main())
     
