@@ -63,9 +63,9 @@ async def get_users():
 
   
 async def save_dlt_message(_time, message_id):
-        data = {"_time": _time}
-        dot = {"message_id":message_id}
-        await dlt_col.insert_many(data,dot)
+    data = {"_time": _time, "message_id": message_id}
+    await dlt_col.insert_one(data)
+
     
     # Modify get_all_dlt_data function to use _time field
 async def get_all_dlt_data(_time):
