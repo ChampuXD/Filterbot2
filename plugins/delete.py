@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 import asyncio
-from pyrogram import Client, idle
+from pyrogram import *
 from db import *
 from bot import dbot as bot
 
@@ -30,7 +30,7 @@ async def delete_messages():
 
         await asyncio.sleep(10)  # Wait for 1 minute
 
-bot.start()
+
+
 loop = asyncio.get_event_loop()
 loop.create_task(delete_messages())
-bot.idle()
