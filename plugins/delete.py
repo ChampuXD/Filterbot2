@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 import asyncio
-from pyrogram import Client
+from pyrogram import Client, idle
 from db import *
 from bot import dbot as bot
 
