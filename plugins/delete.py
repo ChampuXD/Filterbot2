@@ -24,4 +24,4 @@ async def run_check_up():
            await asyncio.sleep(1)
     
 loop = asyncio.get_event_loop()
-loop.create_task(run_check_up)
+loop.create_task(run_check_up())
