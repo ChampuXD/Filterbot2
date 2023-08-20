@@ -15,6 +15,10 @@ user_col = db["USERS"]
 dlt_col  = db["Auto-Delete"]
 del_col = db['delete-msg']
 
+async def del_find(chat_id):
+  data = del_col.find({"chat_id": {"$lte": chat_id}})
+  return data
+  
 async def add_group(group_id, group_name, user_name, user_id, channels, f_sub, verified,plan):
     data = {"_id": group_id, "name":group_name, 
             "user_id":user_id, "user_name":user_name,
