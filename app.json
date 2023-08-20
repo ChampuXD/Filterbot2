@@ -1,0 +1,53 @@
+{
+  "name": "Filter-Bot",
+  "description": "A Telegram bot built with Pyrogram.",
+  "repository": "https://github.com/KashDaYash/Filterbot",
+  "env": {
+    "API_ID": {
+      "description": "The API ID of your Telegram app.",
+      "required": true
+    },
+    "API_HASH": {
+      "description": "The API hash of your Telegram app.",
+      "required": true
+    },
+    "BOT_TOKEN": {
+      "description": "The token of your Telegram bot.",
+      "required": true
+    },
+    "OWNER": {
+      "description": "The username of your Account .",
+      "required": true
+    },
+    "OWNER_ID": {
+      "description": "The Owner id int of your Telegram bot.",
+      "value": 1791227679
+      "required": true
+     },
+    "DATABASE_URI": {
+      "description": "The database string of mongodb ",
+      "value": ""
+      "required": true
+    },
+    "LOG_CHANNEL": {
+      "description": "The chat ID of the chat you want to send notifications to.",
+      "required": true
+    }
+  },
+    "SESSION": {
+      "description": "The Pyrogram Session For Assistant Bot For Searching messages",
+      "required": true
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "stack": "heroku-20",
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "eco"
+    }
+  }
+}
