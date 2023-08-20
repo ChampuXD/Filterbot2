@@ -24,7 +24,7 @@ bot = Client("testbot", api_id=API_ID,
       await delete_all_dlt_data(_time)'''
 
 async def main():
-  try:
+  while True:
     # Get current time
     oki = datetime.now()
     current_time = oki.replace(second=0,microsecond=0).strftime("%y-%m-%d %H:%M")
@@ -40,9 +40,6 @@ async def main():
 
       # Remove the message data from MongoDB
       del_col.delete_one({"_id": del_find["_id"]})
-
-  except Exception as e:
-    print("Error:", e)
 
 
 # Main function to run the check_up function
