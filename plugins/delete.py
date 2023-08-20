@@ -33,10 +33,10 @@ async def delete_messages():
 async def plan_update():
     current_time = datetime.now().replace(second=0,microsecond=0).strftime("%y-%m-%d %H:%M")
     data = del_find(current_time)
-    if current_time > data: 
+    if current_time = data: 
       print(data)
     
 scheduler = AsyncIOScheduler()
-scheduler.add_job(plan_update, "interval", seconds=3)
+scheduler.add_job(plan_update, "interval", seconds=180)
 
 scheduler.start()
