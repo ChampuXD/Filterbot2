@@ -34,7 +34,8 @@ async def search(bot, message):
   verified = (await get_group(chat_id))["verified"]
   if verified == False:
     return
-  channels = await get_group(chat_id)["channels"]
+  chann = await get_group(chat_id)
+  channels = chann['channels']
   if not channels:
       return
   if message.text.startswith("/"):
