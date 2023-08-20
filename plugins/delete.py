@@ -2,7 +2,7 @@ import asyncio
 from db import *
 from time import time
 from bot import dbot
-
+import time 
 
 async def check_up(bot):   
     _time = int(time.time()) 
