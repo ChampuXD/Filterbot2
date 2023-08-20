@@ -8,11 +8,10 @@ from pyrogram.types import *
 
 @Client.on_message(filters.command("info"))
 async def info_handle(_, m):
-  id = m.from_user.id
-  group = await check_plan(id)
-  group_id = group["_id"]
-  plan = group["plan"]
-  print(plan)
+  chat_id = m.chat.id
+  id = m.from_user.id 
+  dexa = await check_plan(id)
+  plan = dexa["plan"]
   name = m.from_user.mention
   if plan != "":
     await m.reply(f"Hey {name} Your Plan Validity {plan}")
