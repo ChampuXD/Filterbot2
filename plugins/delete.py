@@ -28,7 +28,7 @@ async def delete_messages():
         except Exception as e:
             print("Error:", e)
 
-        await asyncio.sleep(60)  # Wait for 1 minute
+        await asyncio.sleep(10)  # Wait for 1 minute
 async def update_documents():
     while True:
         current_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
@@ -38,12 +38,15 @@ async def update_documents():
         documents_to_update = grp_col.find({"plan": {"$lte": timestamp}})
         
         async for doc in documents_to_update:
-            await grp_col.update_one({"_id": doc["_id"]}, {"$set": {"verified": False}})
-            user_id = doc["user_id"]  # Get the user_id from the document
-            id = await grp_col.find_one({"user_id": user_id})
+          print(doc)
+          await grp_col.update_one({"_id": doc["_id"]}, {"$set": {"verified": False}})
+          user_id = doc["user_id"]  # Get the user_id from the document
+          id = await grp_col.find_one({"user_id": user_id})
             
-            if id:
-                await bot.send_message(id["_id"], "Hey Your Plan Expired Today Now")
+          if id:
+              await bot.send_message(id["_id"], "Hey Your Plan Expired Today Now")
+          else:
+            await bot.send_message(OWNER_ID, f"{doc['_id']} plan expired and bot don't send message in there chat)
 
         await asyncio.sleep(5)  # Wait for 1 minute
 
