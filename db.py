@@ -1,6 +1,5 @@
 import asyncio
 from config import *
-from datetime import datetime, timedelta
 from bot import Client as bot
 from pyrogram import enums
 from pymongo.errors import DuplicateKeyError
@@ -124,15 +123,3 @@ async def force_sub(bot, message):
     else:
        return True 
 
-async def update_documents():
-  while True:
-    current_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
-    timestamp = current_date.strftime("%Y-%m-%d")
-    # Find documents with the "plan" field less than or equal to the current date
-    documents_to_update = grp_col.find({"plan": {"$lte": timestamp}})
-    
-    for doc in documents_to_update:
-        await grp_col.update_one({"_id": doc["_id"]}, {"$set": {"verified": False}})
-        id = await grp_col.find({"user_id":doc[user_id]})
-        await bot.send_message(id,"Hey Your Plan Expired Today Now")
-asyncio.create_task(update_documents())

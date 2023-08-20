@@ -33,8 +33,19 @@ async def delete_messages():
             print("Error:", e)
 
         await asyncio.sleep(60)  # Wait for 1 minute
+async def update_documents():
+  while True:
+    current_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+    timestamp = current_date.strftime("%Y-%m-%d")
+    # Find documents with the "plan" field less than or equal to the current date
+    documents_to_update = grp_col.find({"plan": {"$lte": timestamp}})
+    
+    for doc in documents_to_update:
+        await grp_col.update_one({"_id": doc["_id"]}, {"$set": {"verified": False}})
+        id = await grp_col.find({"user_id":doc[user_id]})
+        await bot.send_message(id,"Hey Your Plan Expired Today Now")
 
-if __name__ == "__main__":
-    bot.start()
-    asyncio.get_event_loop().create_task(delete_messages())
-    bot.idle()
+bot.start()
+asyncio.create_task(update_documents())
+asyncio.get_event_loop().create_task(delete_messages())
+bot.idle()
