@@ -42,8 +42,8 @@ async def plan_update():
     chat_id,
     message_id=msg.id
 )
-      except Exception, e:
-        raise e
+      except Exception as e:
+        await dbot.send_message(OWNER,e)
     
 
 dbot.start()
