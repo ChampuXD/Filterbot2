@@ -42,6 +42,7 @@ async def update_documents():
         await bot.send_message(id, "Your Plan Expired Today Now")
 
 bot.start()
-asyncio.create_task(update_documents())
-asyncio.get_event_loop().create_task(delete_messages())
+loop = asyncio.get_event_loop()
+loop.create_task(update_documents())
+loop.create_task(delete_messages())
 bot.idle()
