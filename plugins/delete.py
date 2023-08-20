@@ -2,8 +2,13 @@ from datetime import datetime, timedelta
 import asyncio
 from pyrogram import *
 from db import *
-from bot import dbot as bot
+from bot import dbot
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from apscheduler.triggers.interval import IntervalTrigger
+
+
+
+
 
 async def delete_messages():
     while True:
@@ -21,7 +26,7 @@ async def delete_messages():
                 message_id = d_find["message_id"]
 
                 # Delete the message
-                await bot.delete_messages(chat_id, message_id)
+                await dbot.delete_messages(chat_id, message_id)
 
                 # Remove the message data from MongoDB
                 del_col.delete_one({"_id": d_find["_id"]})
@@ -35,8 +40,44 @@ async def plan_update():
     data = del_find(current_time)
     if current_time = data: 
       print(data)
-    
-scheduler = AsyncIOScheduler()
-scheduler.add_job(plan_update, "interval", seconds=180)
 
-scheduler.start()
+async def check_up(bot):   
+    _time = int(time()) 
+    all_data = await get_all_dlt_data(_time)
+    for data in all_data:
+        try:
+           await bot.delete_messages(chat_id=data["chat_id"],
+                                     message_ids=data["message_id"])           
+        except Exception as e:
+           err=data
+           err["❌ Error"]=str(e)
+           print(err)
+    await delete_all_dlt_data(_time)
+
+async def run_check_up():
+    async with dbot as bot: 
+        while True:  
+           await check_up(bot)
+           await asyncio.sleep(1)
+    
+if __name__=="__main__":   
+   asyncio.run(run_check_up())
+   
+async def run_check_up():
+    async with dbot as bot:
+        scheduler = AsyncIOScheduler()
+        scheduler.add_job(
+            check_up, 
+            trigger=IntervalTrigger(seconds=1),  # Change interval as needed
+            args=[bot],
+            max_instances=1,  # To ensure only one instance runs at a time
+        )
+        scheduler.start()
+        try:
+            await asyncio.get_event_loop().run_forever()
+        except (KeyboardInterrupt, SystemExit):
+            scheduler.shutdown()
+
+if __name__ == "__main__":
+    asyncio.run(run_check_up())
+
