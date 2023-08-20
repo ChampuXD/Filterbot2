@@ -1,53 +1,40 @@
-from time import time
-from datetime import datetime 
-import time 
+from datetime import datetime, timedelta
+import asyncio
+from pyrogram import Client
 from db import *
-from pyrogram import *
 
-bot = Client("testbot", api_id=API_ID,
-              api_hash=API_HASH,
-              bot_token=BOT_TOKEN)
+API_ID = "your_api_id"
+API_HASH = "your_api_hash"
+BOT_TOKEN = "your_bot_token"
 
-'''async def check_up(bot):
+bot = Client("testbot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
+
+async def delete_messages():
     while True:
-      _time = int(time())  # Use int(time()) instead of int(time.time())
-      all_data = await get_all_dlt_data(_time)
-      for data in all_data:
         try:
-          chat_id = data["chat_id"]
-          message_id = data["message_id"]
-          await bot.delete_messages(chat_id=chat_id, message_ids=message_id)
-          print(f"Deleted message_id {message_id} from chat_id {chat_id}")
-        except Exception as e:
-          print(f"Error deleting message_id {message_id} from chat_id {chat_id}: {str(e)}")
-          pass
-      await delete_all_dlt_data(_time)'''
-
-async def delets():
-  while True:
-    # Get current time
-    oki = datetime.now()
-    current_time = oki.replace(second=0,microsecond=0).strftime("%y-%m-%d %H:%M")
-    print(current_time)
-    d_find = del_find(current_time)
-    if current_time >= d_find['time']:
-      print(dati)
-      chat_id = d_find["chat_id"]
-      message_id = d_find["message_id"]
-
-      # Delete the message
-      await dbot.delete_messages(chat_id, message_id)
-
-      # Remove the message data from MongoDB
-      del_col.delete_one({"_id": del_find["_id"]})
-
-
-# Main function to run the check_up function
-'''async def run_check_up():
-    async with bot:
-        await check_up(bot)'''
+            # Get current time
+            oki = datetime.now()
+            current_time = oki.replace(second=0, microsecond=0).strftime("%y-%m-%d %H:%M")
+            print(current_time)
             
-'''if __name__ == "__main__":'''
-bot.start()
-asyncio.create_task(delets())
-    
+            # Query MongoDB for data
+            d_find = del_find(current_time)
+            if d_find and current_time >= d_find['time']:
+                print(d_find)
+                chat_id = d_find["chat_id"]
+                message_id = d_find["message_id"]
+
+                # Delete the message
+                await bot.delete_messages(chat_id, message_id)
+
+                # Remove the message data from MongoDB
+                del_col.delete_one({"_id": d_find["_id"]})
+        except Exception as e:
+            print("Error:", e)
+
+        await asyncio.sleep(60)  # Wait for 1 minute
+
+if __name__ == "__main__":
+    bot.start()
+    asyncio.get_event_loop().create_task(delete_messages())
+    bot.idle()
