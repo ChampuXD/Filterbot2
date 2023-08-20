@@ -38,8 +38,7 @@ from apscheduler.triggers.interval import IntervalTrigger
 async def plan_update():
     current_time = datetime.now().replace(second=0,microsecond=0).strftime("%y-%m-%d %H:%M")
     data = del_find(current_time)
-    if current_time = data: 
-      print(data)
+    print(data)
 
 async def check_up(bot):   
     _time = int(time()) 
