@@ -10,7 +10,7 @@ from apscheduler.triggers.interval import IntervalTrigger
 
 
 
-async def delete_messages():
+'''async def delete_messages():
     while True:
         try:
             # Get current time
@@ -33,7 +33,7 @@ async def delete_messages():
         except Exception as e:
             print("Error:", e)
 
-        await asyncio.sleep(10)  # Wait for 1 minute
+        await asyncio.sleep(10)'''
 
 async def plan_update():
     current_time = datetime.now().replace(second=0,microsecond=0).strftime("%y-%m-%d %H:%M")
