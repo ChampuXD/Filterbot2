@@ -38,6 +38,11 @@ async def check_plan(id):
     group = await grp_col.find_one(data)
     return dict(group)
     
+async def see_plan(timestamp):
+  data = {"plan": timestamp}
+  group = await grp_col.find_one(data)
+  return dict(group)
+    
 async def get_group(id):
     data = {'_id':id}
     group = await grp_col.find_one(data)

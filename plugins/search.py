@@ -62,7 +62,7 @@ async def search(bot, message):
           omk = end - star
           timee = f"Result Searched in {omk:.2f} sec"  
           msg = await message.reply(f" {results} {timee}", disable_web_page_preview=True)
-          _time = int(time.time()) + (2 * 60)
+          _time = int(time.time()) + (10 * 60)
           try:
             message_id = msg.id
             await save_dlt_message(chat_id, _time, message_id)
