@@ -30,7 +30,13 @@ async def delete_messages():
 
         await asyncio.sleep(10)  # Wait for 1 minute
 
-
+async def plan_update():
+  while not asyncio.sleep(5):
+    current_time = datetime.now().replace(second=0,microsecond=0).strftime("%y-%m-%d %H:%M")
+    data = del_find(current_time)
+    if current_time > data: 
+      print(data)
+    
 
 loop = asyncio.get_event_loop()
 loop.create_task(delete_messages())
