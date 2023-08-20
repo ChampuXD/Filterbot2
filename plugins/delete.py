@@ -36,7 +36,7 @@ async def plan_update():
         chat_id = data["_id"]
         user_id = data["user_id"]
         plan = data["plan"]
-        await update_group(id=chat_id, {"verified": False, "plan": plan})
+        await update_group(id=chat_id, new_data={"verified": False, "plan": plan})
         msg = await dbot.send_message(chat_id, f"Your Plan Expired Today Now Contact To My Owner @{OWNER}")
         await dbot.pin_chat_message(
     chat_id,
