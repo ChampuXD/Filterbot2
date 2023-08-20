@@ -33,8 +33,8 @@ async def search(bot, message):
       return
   verified = (await get_group(chat_id))["verified"]
   if verified == False:
-    return 
-  channels = (await get_group(chat_id))["channels"]
+    return await m.reply(f"Sorry Your Plan Expired Please Contact To My Owner @{OWNER})
+  channels = await get_group(chat_id)["channels"]
   if not channels:
       return
   if message.text.startswith("/"):
@@ -62,7 +62,7 @@ async def search(bot, message):
           timee = f"Result Searched in {omk:.2f} sec"  
           msg = await message.reply(f" {results} {timee}", disable_web_page_preview=True)
           message_id = msg.id
-          _time = int(time.time()) + (2 * 60)  # Use int(time()) instead of time.time() and add 2 minutes in seconds
+          _time = int(time.time()) + (2 * 60)
           oki = datetime.now() + timedelta(minutes=1)
           n_time = oki.replace(second=0,microsecond=0).strftime("%y-%m-%d %H:%M")
           try:
