@@ -65,7 +65,7 @@ async def search(bot, message):
           _time = int(time.time()) + (2 * 60)
           try:
             message_id = msg.id
-            await save_dlt_message(_time, message_id)
+            await save_dlt_message(chat_id, _time, message_id)
           except Exception as e:
             print(e)
       
