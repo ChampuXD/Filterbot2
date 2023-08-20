@@ -23,7 +23,7 @@ bot = Client("testbot", api_id=API_ID,
           pass
       await delete_all_dlt_data(_time)'''
 
-async def main():
+async def delets():
   while True:
     # Get current time
     oki = datetime.now()
@@ -49,5 +49,5 @@ async def main():
             
 '''if __name__ == "__main__":'''
 bot.start()
-asyncio.create_task(main())
+asyncio.create_task(delets())
     
