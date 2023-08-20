@@ -14,7 +14,7 @@ async def delete_messages():
             print(current_time)
             
             # Query MongoDB for data
-            d_find = del_find(current_time)
+            d_find = await del_find(current_time)
             if d_find and current_time >= d_find['time']:
                 print(d_find)
                 chat_id = d_find["chat_id"]
