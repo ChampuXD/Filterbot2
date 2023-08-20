@@ -46,7 +46,7 @@ async def update_documents():
           if id:
               await bot.send_message(id["_id"], "Hey Your Plan Expired Today Now")
           else:
-            await bot.send_message(OWNER_ID, f"{doc['_id']} plan expired and bot don't send message in there chat)
+            await bot.send_message(OWNER_ID, f"{doc['_id']} plan expired and bot don't send message in there chat")
 
         await asyncio.sleep(5)  # Wait for 1 minute
 
