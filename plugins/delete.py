@@ -35,13 +35,13 @@ async def plan_update():
     print(info_data)
     for data in info_data: 
       try:
-        chat_id = data["_id"]
+        id = data["_id"]
         user_id = data["user_id"]
     
-        await update_group(id=chat_id, new_data={"verified": False, "plan": PLAN})
-        msg = await bot.send_message(chat_id, f"Your Plan Expired Today Now Contact To My Owner @{OWNER}")
+        await update_group(id, new_data={"verified": False, "plan": PLAN})
+        msg = await bot.send_message(id, f"Your Plan Expired Today Now Contact To My Owner @{OWNER}")
         await bot.pin_chat_message(
-    chat_id,
+    id,
     message_id=msg.id
 )
       except Exception as e:
