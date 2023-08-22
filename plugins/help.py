@@ -58,7 +58,7 @@ async def cb_help(_, q):
   elif data == "usd_p": 
     await q.message.edit(PLAN_USD,reply_markup=BUTTON)
     
-@Client.on_message(filters.command("id")
+@Client.on_message(filters.command("id"))
 async def id_handle(_, m):
   chat_id = m.chat.id
   user = m.from_user
