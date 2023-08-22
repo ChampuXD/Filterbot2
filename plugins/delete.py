@@ -2,7 +2,7 @@ import asyncio
 from db import *
 from config import *
 from time import time
-from bot import dbot
+from bot import dbot as bot
 import time 
 from datetime import datetime 
 
@@ -21,7 +21,7 @@ PLAN = ""
     await delete_all_dlt_data(_time)
 
 async def run_check_up():
-    async with dbot as bot: 
+    async with bot: 
         while True:  
            await check_up(bot)
            await asyncio.sleep(1)'''
@@ -38,15 +38,15 @@ async def plan_update():
         user_id = data["user_id"]
         plan = PLAN
         await update_group(id=chat_id, new_data={"verified": False, "plan": plan})
-        msg = await dbot.send_message(chat_id, f"Your Plan Expired Today Now Contact To My Owner @{OWNER}")
-        await dbot.pin_chat_message(
+        msg = await bot.send_message(chat_id, f"Your Plan Expired Today Now Contact To My Owner @{OWNER}")
+        await bot.pin_chat_message(
     chat_id,
     message_id=msg.id
 )
       except Exception as e:
-        await dbot.send_message(OWNER,e)
+        await bot.send_message(OWNER,e)
     
 
-dbot.start()
+bot.start()
 asyncio.create_task(run_check_up())
 asyncio.create_task(plan_update())
