@@ -69,6 +69,6 @@ async def id_handle(_, m):
   elif m.from_user:
     user_id = m.from_user.id
     MSG += f"Your ID: `{user_id}`"
-    else:
-      None
-    await m.reply(MSG)
+  else:
+    None
+  await m.reply(MSG)
