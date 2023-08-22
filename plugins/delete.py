@@ -48,5 +48,5 @@ async def plan_update():
     
 
 bot.start()
-asyncio.create_task(run_check_up())
+#asyncio.create_task(run_check_up())
 asyncio.create_task(plan_update())
