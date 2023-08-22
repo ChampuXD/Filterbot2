@@ -32,12 +32,13 @@ async def plan_update():
     current_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
     timestamp = current_date.strftime("%Y-%m-%d")
     info_data = await see_plan(_time)
+    print(info_data)
     for data in info_data: 
       try:
         chat_id = data["_id"]
         user_id = data["user_id"]
-        plan = PLAN
-        await update_group(id=chat_id, new_data={"verified": False, "plan": plan})
+    
+        await update_group(id=chat_id, new_data={"verified": False, "plan": PLAN})
         msg = await bot.send_message(chat_id, f"Your Plan Expired Today Now Contact To My Owner @{OWNER}")
         await bot.pin_chat_message(
     chat_id,
