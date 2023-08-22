@@ -4,6 +4,9 @@ from config import *
 from pyrogram import *
 from pyrogram.types import *
 from datetime import datetime, timedelta 
+from time import time
+import time
+
 
 MSG_TO = "This Is Auth Module"
 CHECKING = "Please Provide Me In Correct Format /check -chat id"
@@ -36,8 +39,9 @@ async def auth_handle(bot:Client, m):
     current_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
     end_time = int(m.text.split(None, 2)[-1])
     ok = current_date + timedelta(days=end_time)
+    current_time = int(time.time()) + (end_time * 60)
     timestamp = ok.strftime("%Y-%m-%d")
-    await update_group(id, {"verified": True, "plan": timestamp})
+    await update_group(id, {"verified": True, "plan": current_time})
     await m.reply(f"user id: {user_id}\n username: @{user_name} group chat is verified!")
     await bot.send_message(chat_id, f"hey @{user_name} Purchase A Plan For {end_time}days ")
   else:
