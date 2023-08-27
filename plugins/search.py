@@ -57,7 +57,7 @@ async def search(bot, message):
             results += result_entry
   quri = query.split()         
   for chk in channels:
-    async for omk in quri:
+    for omk in quri:
       async for msg in YaaraOP.search_messages(int(chk), query=omk, limit=8):
         
         if msg.caption or msg.text:
