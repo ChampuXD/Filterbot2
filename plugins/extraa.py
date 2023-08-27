@@ -14,7 +14,7 @@ async def info_handle(_, m):
   plan = dexa["plan"]
   name = m.from_user.mention
   if plan != "":
-    await m.reply(f"Hey {name} Your Subscription till {plan}")
+    await m.reply(f"This Chat Subscription till {plan}")
   else:
     BUTTON = InlineKeyboardMarkup([[
             InlineKeyboardButton("Buy A Plan", user_id=OWNER_ID)]])
