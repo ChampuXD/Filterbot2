@@ -18,7 +18,7 @@ async def info_handle(_, m):
   else:
     BUTTON = InlineKeyboardMarkup([[
             InlineKeyboardButton("Buy A Plan", user_id=OWNER_ID)]])
-      await m.reply(text=f"Hey {name} You haven't a Subscription ",reply_markup=BUTTON)
+    await m.reply(text=f"Hey {name} You haven't a Subscription ",reply_markup=BUTTON)
   
 @Client.on_message(filters.command('leave') & filters.private &  filters.chat(OWNER_ID))
 async def leave_a_chat(bot, message):
