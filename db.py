@@ -1,6 +1,6 @@
 import asyncio
 from config import *
-from bot import Client as bot
+from bot import Client
 from pyrogram import enums
 from pymongo.errors import DuplicateKeyError
 from pyrogram.errors import UserNotParticipant
@@ -12,13 +12,19 @@ db       = dbclient["Filter-Bot"]
 grp_col  = db["GROUPS"]
 user_col = db["USERS"]
 dlt_col  = db["Auto-Delete"]
-del_col = db['delete-msg']
 
+
+async def get_plan_data(_time):
+  data = {"plan": {"$lte": _time}}
+  count = await grp_col.count_documents(data)
+  cursor = grp_col.find(data)
+  all_data = await cursor.to_list(length=int(count))
+  return all_data
   
-async def add_group(group_id, group_name, user_name, user_id, channels, f_sub, verified,plan):
+async def add_group(group_id, group_name, user_name, user_id, channels, f_sub, verified,plan,auto_del):
     data = {"_id": group_id, "name":group_name, 
             "user_id":user_id, "user_name":user_name,
-            "channels":channels, "f_sub":f_sub, "verified":verified,"plan":plan}
+            "channels":channels, "f_sub":f_sub, "verified":verified,"plan":plan,"auto_del": auto_del}
     try:
        await grp_col.insert_one(data)
     except DuplicateKeyError:
@@ -34,14 +40,10 @@ async def delete_group(id):
     await grp_col.delete_one(data)
 
 async def check_plan(id):
-    data = {"user_id": id}
+    data = {"user_id": chat_id}
     group = await grp_col.find_one(data)
     return dict(group)
-    
-async def see_plan(timestamp):
-  data = {"plan": timestamp}
-  group = await grp_col.find_one(data)
-  return dict(group)
+
     
 async def get_group(id):
     data = {'_id':id}
