@@ -10,7 +10,7 @@ from pyrogram.types import *
 async def info_handle(_, m):
   chat_id = m.chat.id
   id = m.from_user.id 
-  dexa = await check_plan(id)
+  dexa = await get_group(chat_id)
   plan = dexa["plan"]
   name = m.from_user.mention
   if plan != "":
