@@ -9,9 +9,9 @@ from pyrogram.errors import *
 @Client.on_message(filters.command("autodel") & filters.group)
 async def auto_del_handler(_, m):
   chat_id = m.chat.id
-  group = await get_group(chat_id)
   if m.chat.type == enums.ChatType.PRIVATE:
     return await m.reply("Please Use In Group Chat")
+  group = await get_group(chat_id)
   user_id = group['user_id']
   auto_dele = group['auto_del']
   if m.from_user.id == user_id:

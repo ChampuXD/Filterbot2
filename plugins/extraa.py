@@ -9,12 +9,12 @@ from pyrogram.types import *
 @Client.on_message(filters.command("info"))
 async def info_handle(_, m):
   chat_id = m.chat.id
+  if m.chat.type == enums.ChatType.PRIVATE:
+    return await m.reply("Please Use In Group Chat")
   id = m.from_user.id 
   dexa = await get_group(chat_id)
   plan = dexa["plan"]
   name = m.from_user.mention
-  if m.chat.type == enums.ChatType.PRIVATE:
-    return await m.reply("Please Use In Group Chat")
     
   if plan != "":
     await m.reply(f"This Chat Subscription till {plan}")
