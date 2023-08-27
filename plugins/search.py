@@ -53,7 +53,7 @@ async def search(bot, message):
           if len(unique_results) >= max_unique_results:
             break
           else:
-            unique_results += result_entry 
+            unique_results.add(result_entry)
             results += result_entry
     
   if results:
