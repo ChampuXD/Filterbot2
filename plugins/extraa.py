@@ -14,9 +14,11 @@ async def info_handle(_, m):
   plan = dexa["plan"]
   name = m.from_user.mention
   if plan != "":
-    await m.reply(f"Hey {name} Your Plan Validity {plan}")
+    await m.reply(f"Hey {name} Your Subscription till {plan}")
   else:
-    await m.reply(f"Hey {name} You Didn't Purchase Any Plan")
+    BUTTON = InlineKeyboardMarkup([[
+            InlineKeyboardButton("Buy A Plan", user_id=OWNER_ID)]])
+      await m.reply(text=f"Hey {name} You haven't a Subscription ",reply_markup=BUTTON)
   
 @Client.on_message(filters.command('leave') & filters.private &  filters.chat(OWNER_ID))
 async def leave_a_chat(bot, message):

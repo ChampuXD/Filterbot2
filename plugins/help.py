@@ -24,7 +24,7 @@ Gives your information and validity of your subscription
 
 Get ID of current chat - /id
 
-Auto_delete : use /Auto_delete command to enable or disable
+Auto_delete : use /autodel command to enable or disable
               auto message delete system.
 '''
 

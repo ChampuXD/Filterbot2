@@ -6,7 +6,7 @@ from pyrogram.types import *
 
 
 @Client.on_message(filters.command("start"))
-async def start_handle(_, m):
+async def start_handle(bot: Client, m):
   user = m.from_user
   START_MSG = f'''Hey {user.mention}    
     

@@ -35,27 +35,26 @@ async def search(bot, message):
   verified = veri["verified"]
   if verified == False:
     return
-  chann = await get_group(chat_id)
-  channels = chann['channels']
+  channels = veri['channels']
   if not channels:
       return
   if message.text.startswith("/"):
       return
   query = await clean_query(message.text)
-  
-
+  max_unique_results = 8
+  unique_results = set() 
   results = ""
   for chk in channels:
     async for msg in YaaraOP.search_messages(int(chk), query=query, limit=8):
       if msg.caption or msg.text:
         name = (msg.text or msg.caption).split("\n")[0]
-        if name in results:
-          continue
-        new_results = f"{name}\n {msg.link}\n\n"
-        if len(results) + len(new_results) > MESSAGE_LENGTH:
-          await message.reply(f"{results}", disable_web_page_preview=True)
-          results = ""
-        results += new_results
+        result_entry = f"{name}\n {msg.link}\n\n"
+        if not result_entry in unique_results: 
+          if len(unique_results) >= max_unique_results:
+            break
+          else:
+            unique_results += result_entry 
+            results += result_entry
     
   if results:
           end = time.time()
@@ -65,7 +64,8 @@ async def search(bot, message):
           _time = int(time.time()) + (10 * 60)
           try:
             message_id = msg.id
-            await save_dlt_message(chat_id, _time, message_id)
+            if veri['auto_del'] == True:
+              await save_dlt_message(chat_id, _time, message_id)
           except Exception as e:
             print(e)
       
