@@ -14,7 +14,7 @@ async def auto_del_handler(_, m):
   auto_dele = group['auto_del']
   if m.from_user.id == user_id:
     t_text = "This Time Auto-Delete Is **OFF** Click On Button And Set **ON**"
-    f_text = "This Time Auto-Delete Is **ON** Click On Button And Set **OFF**"
+    f_text = "This Time Auto-Delete Is **ON** Click Off Button And Set **OFF**"
     
     T_BUTTON = InlineKeyboardMarkup([[
   InlineKeyboardButton("ON",callback_data =f"do_true:{user_id}")

@@ -55,6 +55,20 @@ async def search(bot, message):
           else:
             unique_results.add(result_entry)
             results += result_entry
+  quri = query.split()         
+  for chk in channels:
+    async for omk in quri:
+      async for msg in YaaraOP.search_messages(int(chk), query=omk, limit=8):
+        
+        if msg.caption or msg.text:
+          name = (msg.text or msg.caption).split("\n")[0]
+          result_entry = f"{name}\n {msg.link}\n\n"
+          if not result_entry in unique_results:
+            if len(unique_results) >= max_unique_results:
+              break
+            else:
+              unique_results.add(result_entry)
+              results += result_entry
     
   if results:
           end = time.time()
