@@ -28,11 +28,11 @@ Auto_delete : use /autodel command to enable or disable
               auto message delete system.
 '''
 
-PLAN_USD = '''These are the prices in USD:\n\n`2.5 USD` - per Month\n`8 USD` - per 6 Months\n`15 USD` - per Year\n\nClick on the Buy button to contact the owner'''
+PLAN_USD = '''These are the prices in USD:\n\n`2 USD` - per Month\n`6 USD` - per 6 Months\n`10 USD` - per Year\n\nClick on the Buy button to contact the owner'''
     
-PLAN_INR = '''**These are the prices in INR:**\n\n`200 INR` - per Month\n`600 INR` -  per 6 Months\n`1200 INR` -  per Year\n\nClick on the `Buy` button to contact the owner'''
+PLAN_INR = '''**These are the prices in INR:**\n\n`150 INR` - per Month\n`400 INR` -  per 6 Months\n`800 INR` -  per Year\n\nClick on the `Buy` button to contact the owner'''
 BUTTON = InlineKeyboardMarkup([[
-  InlineKeyboardButton(text="Buy",url=f"t.me/{OWNER}"),
+  InlineKeyboardButton(text="USD PRICE",url="usd_p"),
   InlineKeyboardButton(text="INR PRICE",callback_data="inr_p")
   ]])
 
@@ -49,14 +49,18 @@ async def buy_handle(_ ,m):
 @Client.on_callback_query()
 async def cb_help(_, q):
   data = q.data
-  BTN = InlineKeyboardMarkup([[
+  BTN_1 = InlineKeyboardMarkup([[
   InlineKeyboardButton(text="Buy",url=f"t.me/{OWNER}"),
-  InlineKeyboardButton(text="USD PRICE",callback_data="usd_p")
+  InlineKeyboardButton(text="USD PRICE",callback_data="inr_p")
+  ]])
+  BTN_2 = InlineKeyboardMarkup([[
+  InlineKeyboardButton(text="Buy",url=f"t.me/{OWNER}"),
+  InlineKeyboardButton(text="INR PRICE",callback_data="usd_p")
   ]])
   if data == "inr_p": 
-    await q.message.edit(PLAN_INR,reply_markup=BTN)
+    await q.message.edit(PLAN_INR,reply_markup=BTN_1)
   elif data == "usd_p": 
-    await q.message.edit(PLAN_USD,reply_markup=BUTTON)
+    await q.message.edit(PLAN_USD,reply_markup=BTN_2)
     
 @Client.on_message(filters.command("id"))
 async def id_handle(_, m):
