@@ -70,7 +70,5 @@ async def search(bot, message):
             print(e)
       
   else:
-      x = await message.reply("No Movie Found 🔎")
-      await asyncio.sleep(10)
-      await x.delete()
-    
+      await message.reply("No Movie Found 🔎")
+      

@@ -7,47 +7,42 @@ import time
 from datetime import datetime 
 
 PLAN = ""
-'''async def check_up(bot):   
-    _time = int(time.time()) 
-    all_data = await get_all_dlt_data(_time)
-    for data in all_data:
-        try:
-           await bot.delete_messages(chat_id=data["chat_id"],
-                                     message_ids=data["message_id"])           
-        except Exception as e:
-           err=data
-           err["❌ Error"]=str(e)
-           print(err)
+async def check_up(bot):   
+  _time = int(time.time()) 
+  all_data = await get_all_dlt_data(_time)
+  for data in all_data:
+    try:
+      await bot.delete_messages(chat_id=data["chat_id"],
+      message_ids=data["message_id"])           
+    except Exception as e:
+      err=data
+      err["❌ Error"]=str(e)
+      print(err)
     await delete_all_dlt_data(_time)
 
+
+
+async def check_plan(bot):
+  _time = datetime.now().strftime("%Y-%m-%d")
+  all_data = await get_plan_data(_time)
+  for data in all_data:
+    try:
+      if _time == data['plan']:
+        id = data['_id']
+        user = data['user_name']
+        await update_group(id, {"verified": False, "plan": ""})
+        x = await bot.send_message(chat_id=id, text=f"Subscription Expired ", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Buy Now", url=f"t.me/{OWNER}")]]))
+        await bot.pin_chat_message(chat_id=id, message_id=x.id)
+    except Exception as e:
+      await bot.send_message(OWNER_ID, f"Got error in Related Subscription Expired {e}\nUser : {data['user_name']}\nUser ID : {data['user_id']}\nChat ID :{data['_id']}\n")
+    
 async def run_check_up():
     async with bot: 
         while True:  
            await check_up(bot)
-           await asyncio.sleep(1)'''
-
-async def plan_update():
-  while True:
-    _time = int(time.time())
-    current_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
-    timestamp = current_date.strftime("%Y-%m-%d")
-    info_data = await see_plan(_time)
-    print(info_data)
-    for data in info_data: 
-      try:
-        id = data["_id"]
-        user_id = data["user_id"]
-    
-        await update_group(id, new_data={"verified": False, "plan": PLAN})
-        msg = await bot.send_message(id, f"Your Plan Expired Today Now Contact To My Owner @{OWNER}")
-        await bot.pin_chat_message(
-    id,
-    message_id=msg.id
-)
-      except Exception as e:
-        await bot.send_message(OWNER,e)
-    
+           await check_plan(bot)
+           await asyncio.sleep(1)   
 
 bot.start()
-#asyncio.create_task(run_check_up())
-asyncio.create_task(plan_update())
+asyncio.create_task(run_check_up())
+
