@@ -32,7 +32,7 @@ PLAN_USD = '''These are the prices in USD:\n\n`2 USD` - per Month\n`6 USD` - per
     
 PLAN_INR = '''**These are the prices in INR:**\n\n`150 INR` - per Month\n`400 INR` -  per 6 Months\n`800 INR` -  per Year\n\nClick on the `Buy` button to contact the owner'''
 BUTTON = InlineKeyboardMarkup([[
-  InlineKeyboardButton(text="USD PRICE",url="usd_p"),
+  InlineKeyboardButton(text="USD PRICE",callback_data="usd_p"),
   InlineKeyboardButton(text="INR PRICE",callback_data="inr_p")
   ]])
 
