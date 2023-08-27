@@ -16,7 +16,7 @@ I will filter your channel posts automatically and send it in your group chat wh
 Press /help for more info!
 Press /buy to purchase a subscription!
 
-your chat id = {user.id}'''
+your chat id = {m.chat.id}'''
   await add_user(id=user.id, name=user.username)
   await m.reply(START_MSG)
 
