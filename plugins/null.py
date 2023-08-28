@@ -1,14 +1,13 @@
 from bot import Client
-from db import *
-from config import *
 from pyrogram import *
 from pyrogram.types import *
 
+ADMIN = 1791227679
 @Client.on_message(filters.command("my"))
 async def my_handle(bot: Client, m: Message):
   BUTTON = [[
     InlineKeyboardButton("OWNER",callback_data="okie"),
-    InlineKeyboardButton("Coder",callback_data=1791227679)
+    InlineKeyboardButton("Coder",callback_data=ADMIN)
     ]]
   await m.reply("Test Button",reply_markup=InlineKeyboardMarkup(BUTTON))
   
