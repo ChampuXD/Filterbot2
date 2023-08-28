@@ -28,9 +28,7 @@ Auto_delete : use /autodel command to enable or disable
               auto message delete system.
 '''
 
-PLAN_USD = '''These are the prices in USD:\n\n`2 USD` - per Month\n`6 USD` - per 6 Months\n`10 USD` - per Year\n\nClick on the Buy button to contact the owner'''
-    
-PLAN_INR = '''**These are the prices in INR:**\n\n`150 INR` - per Month\n`400 INR` -  per 6 Months\n`800 INR` -  per Year\n\nClick on the `Buy` button to contact the owner'''
+
 
 
 @Client.on_message(filters.command("help"))
@@ -50,6 +48,9 @@ async def buy_handle(_ ,m):
 @Client.on_callback_query()
 async def cb_help(_, callback_query):
   data = callback_query.data
+  PLAN_USD = '''These are the prices in USD:\n\n`2 USD` - per Month\n`6 USD` - per 6 Months\n`10 USD` - per Year\n\nClick on the Buy button to contact the owner'''
+    
+  PLAN_INR = '''**These are the prices in INR:**\n\n`150 INR` - per Month\n`400 INR` -  per 6 Months\n`800 INR` -  per Year\n\nClick on the `Buy` button to contact the owner'''
   BTN_1 = InlineKeyboardMarkup([[
   InlineKeyboardButton(text="Buy",url=f"t.me/{OWNER}"),
   InlineKeyboardButton(text="USD PRICE",callback_data="inr_p")
