@@ -21,10 +21,10 @@ async def auto_del_handler(bot: Client, m):
     f_text = "This Time Auto-Delete Is **ON** Click Off Button And Set **OFF**"
     
     T_BUTTON = InlineKeyboardMarkup([[
-  InlineKeyboardButton("ON",callback_data =f"do_true:{m.from_user.id}")
+  InlineKeyboardButton("ON",callback_data ="do_true")
   ]])
     F_BUTTON = InlineKeyboardMarkup([[
-  InlineKeyboardButton("OFF",callback_data =f"do_false:{m.from_user.id}")
+  InlineKeyboardButton("OFF",callback_data ="do_false")
   ]])
     if auto_dele == False:
       await m.reply(t_text,reply_markup=T_BUTTON)
@@ -33,11 +33,10 @@ async def auto_del_handler(bot: Client, m):
     
 @Client.on_callback_query()
 async def auto_del_cq(bot:Client, q:CallbackQuery):
-  id = q.message.chat.id 
-  user = q.data.split(":",1)[1]
+  id = q.message.chat.id
+  user = q.message.from_user.id
   uid = q.from_user.id
-  print(user,"",uid)
-  data = q.data.split(":",1)[0]
+  data = q.data
   if uid == user:
     if data == "do_true":
       await update_group(id, {"auto_del": True})
