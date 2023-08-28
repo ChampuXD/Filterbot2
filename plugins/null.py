@@ -7,7 +7,7 @@ ADMIN = 1791227679
 async def my_handle(bot: Client, m: Message):
   BUTTON = [[
     InlineKeyboardButton("OWNER",callback_data="okie"),
-    InlineKeyboardButton("Coder",callback_data=ADMIN)
+    InlineKeyboardButton("Coder",user_id=ADMIN)
     ]]
   await m.reply("Test Button",reply_markup=InlineKeyboardMarkup(BUTTON))
   
