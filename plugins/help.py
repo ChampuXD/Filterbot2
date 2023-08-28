@@ -1,5 +1,5 @@
 from config import * 
-from bot import Client
+from bot import Client, dbot
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from db import *
@@ -36,7 +36,7 @@ async def help_handler(bot: Client, m):
   chat_id = m.chat.id
   await m.reply(HELP_TEXT)
 
-@Client.on_message(filters.command("buy")) 
+@dbot.on_message(filters.command("buy")) 
 async def buy_handle(bot: Client,m):
   BUTTON = InlineKeyboardMarkup([[
   InlineKeyboardButton(text="USD PRICE",callback_data="usd_p"),
@@ -44,7 +44,7 @@ async def buy_handle(bot: Client,m):
   ]])
   await m.reply(text="All The Available Plans",reply_markup=BUTTON)
   
-@Client.on_callback_query()
+@dbot.on_callback_query()
 async def cb_help(bot: Client, callback_query):
   data = callback_query.data
   PLAN_USD = '''These are the prices in USD:\n\n`2 USD` - per Month\n`6 USD` - per 6 Months\n`10 USD` - per Year\n\nClick on the Buy button to contact the owner'''
