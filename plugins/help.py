@@ -1,7 +1,7 @@
 from config import * 
 from bot import Client
-from pyrogram import *
-from pyrogram.types import *
+from pyrogram import filters
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from db import *
 
 HELP_TEXT = f'''😇How To use  me
@@ -32,13 +32,12 @@ Auto_delete : use /autodel command to enable or disable
 
 
 @Client.on_message(filters.command("help"))
-async def help_handler(_, m):
+async def help_handler(bot: Client, m):
   chat_id = m.chat.id
   await m.reply(HELP_TEXT)
 
 @Client.on_message(filters.command("buy")) 
-async def buy_handle(_ ,m):
-  chat_id = m.chat.id
+async def buy_handle(bot: Client,m):
   BUTTON = InlineKeyboardMarkup([[
   InlineKeyboardButton(text="USD PRICE",callback_data="usd_p"),
   InlineKeyboardButton(text="INR PRICE",callback_data="inr_p")
@@ -46,7 +45,7 @@ async def buy_handle(_ ,m):
   await m.reply(text="All The Available Plans",reply_markup=BUTTON)
   
 @Client.on_callback_query()
-async def cb_help(_, callback_query):
+async def cb_help(bot: Client, callback_query):
   data = callback_query.data
   PLAN_USD = '''These are the prices in USD:\n\n`2 USD` - per Month\n`6 USD` - per 6 Months\n`10 USD` - per Year\n\nClick on the Buy button to contact the owner'''
     
@@ -65,7 +64,7 @@ async def cb_help(_, callback_query):
     await callback_query.message.edit(PLAN_USD,reply_markup=BTN_2)
     
 @Client.on_message(filters.command("id"))
-async def id_handle(_, m):
+async def id_handle(bot:Client , m):
   chat_id = m.chat.id
   user = m.from_user
   MSG = f"This Chat ID : `{chat_id}`\n"
