@@ -62,7 +62,8 @@ async def cb_help(bot: Client, callback_query):
     await callback_query.message.edit(PLAN_INR,reply_markup=BTN_1)
   elif data == "usd_p": 
     await callback_query.message.edit(PLAN_USD,reply_markup=BTN_2)
-    
+ 
+dbot.start()  
 @Client.on_message(filters.command("id"))
 async def id_handle(bot:Client , m):
   chat_id = m.chat.id
