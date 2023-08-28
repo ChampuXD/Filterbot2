@@ -85,5 +85,5 @@ async def search(bot, message):
             print(e)
       
   else:
-      await message.reply("No Movie Found 🔎")
+      await message.reply("No Results Found 🔎")
       

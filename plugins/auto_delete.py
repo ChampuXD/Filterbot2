@@ -6,7 +6,7 @@ from pyrogram.types import *
 from pyrogram.errors import *
 
 
-@Client.on_message(filters.command("autodel") & filters.group)
+@Client.on_message(filters.command("autodel"))
 async def auto_del_handler(_, m):
   chat_id = m.chat.id
   if m.chat.type == enums.ChatType.PRIVATE:
@@ -19,10 +19,10 @@ async def auto_del_handler(_, m):
     f_text = "This Time Auto-Delete Is **ON** Click Off Button And Set **OFF**"
     
     T_BUTTON = InlineKeyboardMarkup([[
-  InlineKeyboardButton("ON",callback_data =f"do_true:{user_id}")
+  InlineKeyboardButton("ON",callback_data =f"do_true:{m.from_user.id}")
   ]])
     F_BUTTON = InlineKeyboardMarkup([[
-  InlineKeyboardButton("OFF",callback_data =f"do_false:{user_id}")
+  InlineKeyboardButton("OFF",callback_data =f"do_false:{m.from_user.id}")
   ]])
     if auto_dele == False:
       await m.reply(t_text,reply_markup=T_BUTTON)
