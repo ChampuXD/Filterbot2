@@ -7,7 +7,7 @@ from pyrogram.errors import *
 
 
 @Client.on_message(filters.command("autodel"))
-async def auto_del_handler(_, m):
+async def auto_del_handler(bot: Client, m):
   chat_id = m.chat.id
   if m.text == "/autodel":
     return None
@@ -32,10 +32,11 @@ async def auto_del_handler(_, m):
       await m.reply(f_text,reply_markup=F_BUTTON)
     
 @Client.on_callback_query()
-async def auto_del_cq(_, q):
+async def auto_del_cq(bot:Client, q:CallbackQuery):
   id = q.message.chat.id 
   user = q.data.split(":",1)[1]
   uid = q.from_user.id
+  print(user,"",uid)
   data = q.data.split(":",1)[0]
   if uid == user:
     if data == "do_true":
