@@ -55,7 +55,7 @@ async def search(bot, message):
             unique_results.add(result_entry)
             results += result_entry
   quri = query.split()         
-  if not len(unique_results) >= max_unique_results:
+  if len(unique_results) <= max_unique_results:
     for chk in channels:
       for omk in quri:
         async for msg in YaaraOP.search_messages(int(chk), query=omk, limit=8):
@@ -75,7 +75,7 @@ async def search(bot, message):
           omk = end - star
           timee = f"Result Searched in {omk:.2f} sec"  
           msg = await message.reply(f" {results} {timee}", disable_web_page_preview=True)
-          _time = int(time.time()) + (1 * 60)
+          _time = int(time.time()) + (5 * 60)
           try:
             message_id = msg.id
             if veri['auto_del'] == True:
@@ -84,5 +84,8 @@ async def search(bot, message):
             print(e)
       
   else:
-      await message.reply("No Results Found 🔎")
+      xx = await message.reply("No Results Found 🔎")
+      await asyncio.sleep(20)
+      await xx.delete()
+      
       
