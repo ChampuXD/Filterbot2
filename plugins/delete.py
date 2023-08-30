@@ -18,7 +18,7 @@ PLAN = ""
       err=data
       err["❌ Error"]=str(e)
       print(err)
-    await delete_all_dlt_data(_time)
+    await delete_all_dlt_data(_time)'''
 
 
 
@@ -39,10 +39,10 @@ async def check_plan(bot):
 async def run_check_up():
     async with bot: 
         while True:  
-           await check_up(bot)
+           #await check_up(bot)
            await check_plan(bot)
            await asyncio.sleep(1)   
 
 bot.start()
-asyncio.create_task(run_check_up())'''
+asyncio.create_task(run_check_up())
 
