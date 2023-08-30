@@ -7,7 +7,7 @@ import time
 from datetime import datetime 
 
 PLAN = ""
-'''async def check_up(bot):   
+async def check_up(bot):   
   _time = int(time.time()) 
   all_data = await get_all_dlt_data(_time)
   for data in all_data:
@@ -18,7 +18,7 @@ PLAN = ""
       err=data
       err["❌ Error"]=str(e)
       print(err)
-    await delete_all_dlt_data(_time)'''
+    await delete_all_dlt_data(_time)
 
 
 
@@ -41,7 +41,7 @@ async def run_check_up():
         while True:  
            #await check_up(bot)
            await check_plan(bot)
-           await asyncio.sleep(1)   
+           await asyncio.sleep(30)   
 
 bot.start()
 asyncio.create_task(run_check_up())
