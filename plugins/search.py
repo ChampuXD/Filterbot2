@@ -7,7 +7,6 @@ from config import *
 from pyrogram import *
 from pyrogram.errors import FloodWait
 import time
-import urllib.parse
 
 MESSAGE_LENGTH = 4096
 
@@ -76,12 +75,12 @@ async def search(bot, message):
           omk = end - star
           timee = f"Result Searched in {omk:.2f} sec"  
           msg = await message.reply(f" {results} {timee}", disable_web_page_preview=True)
-          _time = int(time.time()) + (10 * 60)
+          _time = int(time.time()) + (1 * 60)
           try:
             message_id = msg.id
             if veri['auto_del'] == True:
               await save_dlt_message(chat_id, _time, message_id)
-          except Exception as e:
+          except FloodWait as e:
             print(e)
       
   else:
