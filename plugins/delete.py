@@ -5,6 +5,8 @@ from time import time
 from bot import dbot as bot
 import time 
 from datetime import datetime 
+from pyrogram import filters
+from pyrogram.types import * 
 
 PLAN = ""
 async def check_up(bot):   
