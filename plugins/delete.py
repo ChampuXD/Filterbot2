@@ -39,7 +39,7 @@ async def check_plan(bot):
 async def run_check_up():
     async with bot: 
         while True:  
-           #await check_up(bot)
+           await check_up(bot)
            await check_plan(bot)
            await asyncio.sleep(30)   
 
