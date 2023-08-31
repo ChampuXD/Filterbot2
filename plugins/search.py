@@ -43,7 +43,7 @@ async def search(bot, message):
   max_unique_results = 8
   unique_results = set() 
   results = ""
-  quri = dict(query.split())
+  quri = query.split()
   for chk in channels:
     async for msg in YaaraOP.search_messages(int(chk), query=query, limit=8):
       if msg.caption or msg.text:
