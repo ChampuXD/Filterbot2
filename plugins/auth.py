@@ -8,7 +8,6 @@ from time import time
 import time
 
 
-MSG_TO = "This Is Auth Module"
 CHECKING = "Please Provide Me In Correct Format /check -chat id"
 
 
