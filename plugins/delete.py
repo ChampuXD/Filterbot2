@@ -101,18 +101,18 @@ async def auto_del_handler(_, m):
       await m.reply(f_text,reply_markup=F_BUTTON)
     
 @bot.on_callback_query()
-async def auto_del_cq(_, q:CallbackQuery):
-  id = q.message.chat.id
-  user = q.message.from_user.id
-  uid = q.from_user.id
-  data = q.data
+async def cb_autodel(_, callback_query: CallbackQuery):
+  id = callback_query.message.chat.id
+  user = callback_query.message.from_user.id
+  uid = callback_query.from_user.id
+  data = callback_query.data
   if uid == user:
     if data == "do_true":
       await update_group(id, {"auto_del": True})
-      await q.message.edit("This Chat Auto Delete Message **ON**")
+      await callback_query.message.edit("This Chat Auto Delete Message **ON**")
     elif data == "do_false": 
       await update_group(id, {"auto_del": False})
-      await q.message.edit("This Chat Auto Delete Message **OFF**")
+      await callback_query.message.edit("This Chat Auto Delete Message **OFF**")
 
 
 bot.start()
