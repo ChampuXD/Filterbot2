@@ -1,4 +1,4 @@
-from bot import Client as bot
+from bot import Client
 from db import *
 from config import *
 from pyrogram import *
@@ -11,26 +11,26 @@ import time
 CHECKING = "Please Provide Me In Correct Format /check -chat id"
 
 
-@bot.on_message(filters.command("check") & filters.user(OWNER_ID))
-async def chat_id_check(_, m):
+@Client.on_message(filters.command("check") & filters.user(OWNER_ID))
+async def chat_id_check(bot: Client, m):
   chat_id = m.chat.id
   if m.text == "/check":
     await m.reply(CHECKING)
   else:
     n_id = int(m.text.split(None,1)[1])
-    group = await bot.get_chat(n_id)
+    group = await Client.get_chat(n_id)
     uname = group.username 
     await m.reply("You Giving Me @" + uname + " Chat ID")
   
-@bot.on_message(filters.command("auth") & filters.private & filters.user(OWNER_ID))
-async def auth_handle(_, m):
+@Client.on_message(filters.command("auth") & filters.private & filters.user(OWNER_ID))
+async def auth_handle(bot: Client, m):
   if m.text == "/auth":
     await m.reply("Please Provide Group ID And Time Period like /auth Group ID Time ")
   id = int(m.text.split(None,2)[1])
   group = await get_group(id)
   user_id = int(group["user_id"])
-  user_name = group['user_name']
-  okie = await bot.get_users(user_id)
+  user_name = if group['user_name']
+  okie = await Client.get_users(user_id)
   verified = group["verified"]
   if verified == True:
     await m.reply(f"user id: {user_id}\n username: @{user_name} group chat is already verified!")
