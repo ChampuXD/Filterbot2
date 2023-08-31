@@ -17,12 +17,12 @@ logging.basicConfig(
 LOGGER = logging.getLogger(__name__)
 
 # Initialize clients
-YaaraOP = Client(name="user", session_string=SESSION)
-dbot = Client("testbot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
+YaaraOP = Client(name="user_session", session_string=SESSION)
+dbot = Client("auto_delete_session", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 class Bot(Client):
     def __init__(self):
         super().__init__(
-            "bot",
+            "bot_session",
             api_id=API_ID,
             api_hash=API_HASH,
             bot_token=BOT_TOKEN,
