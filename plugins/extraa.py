@@ -1,4 +1,4 @@
-from bot import Client
+from bot import Client as bot
 from db import *
 from config import *
 from pyrogram import *
@@ -6,7 +6,7 @@ from pyrogram.types import *
 
 
 
-@Client.on_message(filters.command("info"))
+@bot.on_message(filters.command("info"))
 async def info_handle(_, m):
   chat_id = m.chat.id
   if m.chat.type == enums.ChatType.PRIVATE:
@@ -23,7 +23,7 @@ async def info_handle(_, m):
             InlineKeyboardButton("Buy A Plan", user_id=OWNER_ID)]])
     await m.reply(text=f"Hey {name} You haven't a Subscription ",reply_markup=BUTTON)
   
-@Client.on_message(filters.command('leave') & filters.private &  filters.chat(OWNER_ID))
+@bot.on_message(filters.command('leave') & filters.private &  filters.chat(OWNER_ID))
 async def leave_a_chat(bot, message):
     if len(message.command) == 1:
         return await message.reply('Give me a chat id')

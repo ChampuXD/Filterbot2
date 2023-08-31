@@ -19,7 +19,7 @@ async def connect(bot:Client, message):
     if message.from_user.id!=user_id:
        return await m.edit(f"Only @{user_name} can use this command 😁")
     if bool(verified)==False:
-       return await m.edit(f"Hey {message.from_user.mention} You Didn't Purchase Any Plan !\n Contact To My Owner @{OWNER}")    
+       return await m.edit(f"Hey {message.from_user.mention} You Didn't Purchase Any Plan !\n Contact To My Owner @{OWNER}",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Buy",url=f"t.me/{OWNER}")]]))    
     try:
        channel = int(message.command[-1])
        if channel in channels:
