@@ -34,7 +34,7 @@ async def search(bot, message):
   verified = veri["verified"]
   if verified == False:
     return
-  channels = veri['channels']
+  channels = veri["channels"]
   if not channels:
       return
   if message.text.startswith("/"):
@@ -43,7 +43,7 @@ async def search(bot, message):
   max_unique_results = 8
   unique_results = set() 
   results = ""
-  quri = query.split()
+  quri = dict(query.split())
   for chk in channels:
     async for msg in YaaraOP.search_messages(int(chk), query=query, limit=8):
       if msg.caption or msg.text:
