@@ -28,7 +28,7 @@ async def auth_handle(_, m):
     await m.reply("Please Provide Group ID And Time Period like /auth Group ID Time ")
   id = int(m.text.split(None,2)[1])
   group = await get_group(id)
-  user_id = group["user_id"]
+  user_id = int(group["user_id"])
   user_name = group['user_name']
   okie = await bot.get_users(user_id)
   verified = group["verified"]
