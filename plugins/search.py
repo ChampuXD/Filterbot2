@@ -57,7 +57,6 @@ async def search(bot, message):
             results += result_entry
     for omk in quri:
       async for msg in YaaraOP.search_messages(int(chk), query=omk, limit=8):
-        
         if msg.caption or msg.text:
           name = (msg.text or msg.caption).split("\n")[0]
           result_entry = f"{name}\n {msg.link}\n\n"
