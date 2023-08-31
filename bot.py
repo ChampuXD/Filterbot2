@@ -32,7 +32,7 @@ class Bot(Client):
         try:
             await super().start()
             await YaaraOP.start()
-            await Client.send_message(OWNER_ID, "START")
+            await Client.send_message("@YaaraOP", "START")
             await YaaraOP.send_message("me",'chtuiteg')# Start the User client
             LOGGER.info("Bot Started ⚡")
         except Exception as e:
