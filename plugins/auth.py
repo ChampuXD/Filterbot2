@@ -29,8 +29,7 @@ async def auth_handle(_, m):
   id = int(m.text.split(None,2)[1])
   group = await get_group(id)
   user_id = group["user_id"]
-  usr = f"@{group['user_name']}"
-  user_name = await Client.get_users(usr)
+  user_name = group['user_name']
   verified = group["verified"]
   if verified == True:
     await m.reply(f"user id: {user_id}\n username: {usr} group chat is already verified!")
