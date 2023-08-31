@@ -5,7 +5,7 @@ from pyrogram import *
 from pyrogram.types import *
 
 @Client.on_message(filters.group & filters.command("index"))
-async def connect(bot:Client, message):
+async def connect(bot: Client, message):
     m=await message.reply("Please wait..")
     user = await YaaraOP.get_me()
     try:
@@ -84,7 +84,7 @@ async def disconnect(bot:Client, message):
 
 @Client.on_message(filters.group & filters.command("viewlist"))
 async def connections(bot:Client, message):
-    group     = await get_group(message.chat.id)    
+    group = await get_group(message.chat.id)    
     user_id   = group["user_id"]
     user_name = group["user_name"]
     channels  = group["channels"]
