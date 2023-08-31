@@ -29,8 +29,7 @@ async def auth_handle(bot: Client, m):
   id = int(m.text.split(None,2)[1])
   group = await get_group(id)
   user_id = int(group["user_id"])
-  user_name = if group['user_name']
-  okie = await Client.get_users(user_id)
+  user_name = group['user_name']
   verified = group["verified"]
   if verified == True:
     await m.reply(f"user id: {user_id}\n username: @{user_name} group chat is already verified!")
@@ -42,7 +41,7 @@ async def auth_handle(bot: Client, m):
     timestamp = ok.strftime("%Y-%m-%d")
     await update_group(id, {"verified": True, "plan": timestamp})
     await m.reply(f"user id: {user_id}\n username: @{user_name} group chat is verified!")
-    await bot.send_message(id, f"hey {okie.mention} Purchase A Subscription For {end_time}days ")
+    await bot.send_message(id, f"hey @{user_name} Purchase A Subscription For {end_time}days ")
   else:
     await m.reply("Verification Request Failed !!\nPlease Give Me Command in correct format\n **`/auth Group ID Time`**")
   
