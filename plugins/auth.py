@@ -30,9 +30,10 @@ async def auth_handle(_, m):
   group = await get_group(id)
   user_id = group["user_id"]
   user_name = group['user_name']
+  okie = await bot.get_users(user_id)
   verified = group["verified"]
   if verified == True:
-    await m.reply(f"user id: {user_id}\n username: {usr} group chat is already verified!")
+    await m.reply(f"user id: {user_id}\n username: @{user_name} group chat is already verified!")
   elif verified == False:
     current_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
     end_time = int(m.text.split(None, 2)[-1])
@@ -40,8 +41,8 @@ async def auth_handle(_, m):
     current_time = int(time.time()) + (end_time * 60)
     timestamp = ok.strftime("%Y-%m-%d")
     await update_group(id, {"verified": True, "plan": timestamp})
-    await m.reply(f"user id: {user_id}\n username: {usr} group chat is verified!")
-    await bot.send_message(id, f"hey @{user_name} Purchase A Plan For {end_time}days ")
+    await m.reply(f"user id: {user_id}\n username: @{user_name} group chat is verified!")
+    await bot.send_message(id, f"hey {okie.mention} Purchase A Subscription For {end_time}days ")
   else:
     await m.reply("Verification Request Failed !!\nPlease Give Me Command in correct format\n **`/auth Group ID Time`**")
   
