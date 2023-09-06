@@ -23,7 +23,7 @@ async def clean_query(query):
     return " ".join(cleaned_words)
 
 
-@Client.on_message(filters.text & filters.group & filters.incoming & ~filters.command(["auth", "index", "id"]))
+@Client.on_message(filters.command("movie") & filters.group & filters.incoming & ~filters.command(["auth", "index", "id"]))
 async def search(bot, message):
   chat_id = message.chat.id
   star = time.time()
@@ -39,7 +39,7 @@ async def search(bot, message):
       return
   if message.text.startswith("/"):
       return
-  query = await clean_query(message.text)
+  query = await clean_query(message.text.split("",1)[1])
   max_unique_results = 8
   unique_results = set() 
   results = ""
