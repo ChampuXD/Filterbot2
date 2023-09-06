@@ -1,7 +1,7 @@
 {
   "name": "Filter-Bot",
   "description": "A Telegram bot built with Pyrogram.",
-  "repository": "https://github.com/TheChampu/Filterbot2.git",
+  "repository": "https://github.com/TheChampu/Filterbot2",
   "env": {
     "API_ID": {
       "description": "The API ID of your Telegram app.",
@@ -21,12 +21,12 @@
     },
     "OWNER_ID": {
       "description": "The Owner id int of your Telegram bot.",
-      "value": 1791227679
+      "value": 1791227679,
       "required": true
-     },
+    },
     "DATABASE_URI": {
       "description": "The database string of mongodb ",
-      "value": ""
+      "value": "",
       "required": true
     },
     "LOG_CHANNEL": {
@@ -34,9 +34,9 @@
       "required": true
     }
   },
-    "SESSION": {
-      "description": "The Pyrogram Session For Assistant Bot For Searching messages",
-      "required": true
+  "SESSION": {
+    "description": "The Pyrogram Session For Assistant Bot For Searching messages",
+    "required": true
   },
   "buildpacks": [
     {
