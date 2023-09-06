@@ -1,7 +1,7 @@
 {
   "name": "Filter-Bot",
   "description": "A Telegram bot built with Pyrogram.",
-  "repository": "https://github.com/TheChampu/Filterbot2",
+  "repository": "https://github.com/TheChampu/Filterbot2.git",
   "env": {
     "API_ID": {
       "description": "The API ID of your Telegram app.",
