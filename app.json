@@ -32,12 +32,11 @@
     "LOG_CHANNEL": {
       "description": "The chat ID of the chat you want to send notifications to.",
       "required": true
-    }
-  },
-  "SESSION": {
+    },
+    "SESSION": {
     "description": "The Pyrogram Session For Assistant Bot For Searching messages",
     "required": true
-  },
+    },
   "buildpacks": [
     {
       "url": "heroku/python"
