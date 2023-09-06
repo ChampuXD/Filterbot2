@@ -36,7 +36,8 @@
     "SESSION": {
     "description": "The Pyrogram Session For Assistant Bot For Searching messages",
     "required": true
-    },
+    }
+  },
   "buildpacks": [
     {
       "url": "heroku/python"
